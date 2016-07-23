@@ -1,0 +1,12 @@
+/vendor
+/node_modules
+/public/storage
+/bower_components
+Homestead.yaml
+Homestead.json
+.env
+/angular/.sass-cached
+/public/styles/*
+/public/scripts/*
+/public/views/*
+/bower_components

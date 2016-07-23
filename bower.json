@@ -1,0 +1,25 @@
+{
+  "name": "moView Web App",
+  "version": "1.0.0",
+  "authors": [
+    "Nguyen Tran <kevtran07@gmail.com>"
+  ],
+  "description": "moView Web Application",
+  "main": "app.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "overrides": {},
+  "dependencies": {
+    "jquery": "1.9.1 - 2",
+    "angular": "~1.5.0",
+    "angular-bootstrap": "2.0.0",
+    "bootstrap-css-only": "~3.3.6",
+    "angular-ui-router": "~0.2.18",
+    "angular-mocks": "~1.5.0"
+  }
+}
