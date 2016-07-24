@@ -14,7 +14,8 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/users/{id?}', 'UserController@index');
+Route::get('/users/{id?}', 'UserController@getUserbyId');
 Route::post('/users', 'UserController@add');
 Route::post('/users/{id}', 'UserController@update');
 Route::delete('/users/{id}', 'UserController@destroy');
+Route::post('/login', 'UserController@login');

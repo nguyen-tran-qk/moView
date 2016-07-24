@@ -1,4 +1,4 @@
 (function() {
 	'use strict';
-	var app = angular.module('MoviewApp', ['MoviewControllers', 'CarettRoutes']);
+	var app = angular.module('MoviewApp', ['ui.bootstrap', 'MoviewControllers', 'CarettRoutes']);
 }());

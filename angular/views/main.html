@@ -1,1 +1,5 @@
-  <button class="btn btn-primary" ng-repeat="user in users">{{ user.username }}</button>
+  <button class="btn btn-primary" ng-repeat="user in usersList">{{ user.username }}</button>
+<button type="button" class="btn btn-warning" ng-click="openLogin()">
+	Login
+</button>
+<h1 ng-if="user.username">Welcome, {{ user.username }} dep trai!!!</h1>

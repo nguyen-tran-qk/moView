@@ -15,7 +15,7 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function index($id = null) {
+    public function getUserbyId($id = null) {
         if ($id == null) {
             return User::orderBy('id', 'asc')->get();
         } else {
@@ -79,5 +79,24 @@ class UserController extends Controller
         $user->delete();
 
         return "User record successfully deleted #" . $request->input('id');
+    }
+
+    /**
+    * Login with username and password
+    *
+    **/
+    public function login(Request $request) {
+        // echo $request->input('username');
+        $user = User::where('username', $request->input('username'))->first();
+        if (isset($user)) {
+            // echo $user;
+           if ($user->password == $request->input('password')) {
+               return $user;
+           } else {
+                return 'Invalid username/password';
+            }
+        } else {
+            return 'Invalid username/password';
+        }
     }
 }
