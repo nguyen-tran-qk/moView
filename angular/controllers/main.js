@@ -4,14 +4,9 @@
     .controller('MainController', ['$scope', '$http', '$uibModal', 'UserService', function($scope, $http, $uibModal, UserService) {
       $scope.user = {};
       //get users list from API
-      UserService.getUserList(function(res) {
-        $scope.usersList = res;
-      });
-      // $http.get('/users')
-      //   .success(function(res) {
-      //     $scope.usersList = res;
-      //   });
-
+      // UserService.getUserList(function(res) {
+      //   $scope.usersList = res;
+      // });
 
       //function to open Login modal, refer to ui-bootstrap docs for Modals
       $scope.openLogin = function() {
