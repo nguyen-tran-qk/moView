@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('MoviewServices')
+  angular.module('MoviewServices', [])
     .factory('UserService', ['$http', '$q', /*'ZendeskWidget',*/ function($http, $q /*, ZendeskWidget*/ ) {
       var user,
         data = {};
