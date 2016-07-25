@@ -14,8 +14,10 @@
 Route::get('/', function () {
     return view('index');
 });
+
 Route::get('/users/{id?}', 'UserController@getUserbyId');
 Route::post('/users', 'UserController@addNewUser');
 Route::post('/users/{id}', 'UserController@updateUser');
-// Route::delete('/users/{id}', 'UserController@removeUser');
 Route::post('/login', 'UserController@login');
+
+Route::get('/movies/{id?}', 'MoviesController@getMoviebyId');
