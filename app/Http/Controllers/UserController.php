@@ -29,7 +29,7 @@ class UserController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function add(Request $request) {
+    public function addNewUser(Request $request) {
         $user = new User;
 
         $user->username = $request->input('username');
@@ -37,7 +37,9 @@ class UserController extends Controller
         $user->role = 1;
         $user->save();
 
-        return 'User record successfully created with id ' . $user->id;
+        // return 'User record successfully created with id ' . $user->id;
+        return self::makeResponse(array('user' => array('id' => $user->id)), 200, '', '');
+
     }
 
     /**
@@ -91,12 +93,13 @@ class UserController extends Controller
         if (isset($user)) {
             // echo $user;
            if ($user->password == $request->input('password')) {
-               return $user;
+                return self::makeResponse(array('user' => $user), 200, '', '');
+               // return $user;
            } else {
-                return 'Invalid username/password';
+                return self::makeResponse([], 404, 'Invalid username/password', '');
             }
         } else {
-            return 'Invalid username/password';
+            return self::makeResponse([], 404, 'Invalid username/password', '');
         }
     }
 }
