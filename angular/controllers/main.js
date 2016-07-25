@@ -4,11 +4,14 @@
     .controller('MainController', ['$scope', '$http', '$uibModal', 'UserService', function($scope, $http, $uibModal, UserService) {
       $scope.user = {};
       //get users list from API
-      //this should be implemented in services
-      $http.get('/users')
-        .success(function(res) {
-          $scope.usersList = res;
-        });
+      UserService.getUserList(function(res) {
+        $scope.usersList = res;
+      });
+      // $http.get('/users')
+      //   .success(function(res) {
+      //     $scope.usersList = res;
+      //   });
+
 
       //function to open Login modal, refer to ui-bootstrap docs for Modals
       $scope.openLogin = function() {
@@ -29,18 +32,18 @@
         'username': '',
         'password': null
       };
-      $scope.ok = function() {
-        UserService.login($scope.user, function(res) {
-            if (res && res.username) {
-              $uibModalInstance.close(res);
-            } else {}
-          })
-          // $http.post('/login', { username: $scope.user.username, password: $scope.user.password })
+                // $http.post('/login', { username: $scope.user.username, password: $scope.user.password })
           //   .success(function(res) {
           //     if (res && res.username) {
           //       $uibModalInstance.close(res);
           //     } else {}
           //   });
+      $scope.ok = function() {
+        UserService.login($scope.user, function(res) {
+          if (res && res.username) {
+            $uibModalInstance.close(res);
+          } else {}
+        })
       };
 
       $scope.cancel = function() {
