@@ -17,7 +17,7 @@
         },
         login: function(user, callback, errorCallback) {
           $http({
-              url: '/users/sign-in',
+              url: '/login',
               method: 'POST',
               data: user
             })
@@ -84,33 +84,6 @@
             })
             .error(function() {
 
-            });
-        },
-        getChallengeByUser: function(id, filter, category, query, status, callback, errorCallback) {
-          var link = '/users/' + id + '/challenges?filter=' + filter + '&sort=' + category + '&q=' + query + '&status=' + status;
-          $http.get(link)
-            .success(function(res) {
-              if (callback) {
-                callback(res);
-              }
-            })
-            .error(function(res) {
-              if (errorCallback) {
-                errorCallback(res);
-              }
-            });
-        },
-        getCorroborator: function(callback, errorCallback) {
-          $http.get('/users/get-corroborator')
-            .success(function(res) {
-              if (callback) {
-                callback(res);
-              }
-            })
-            .error(function(res) {
-              if (errorCallback) {
-                errorCallback(res);
-              }
             });
         }
       };

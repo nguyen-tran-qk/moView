@@ -1,8 +1,8 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers', [])
-    .controller('MainController', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
-    	$scope.user = {};
+    .controller('MainController', ['$scope', '$http', '$uibModal', 'UserService', function($scope, $http, $uibModal, UserService) {
+      $scope.user = {};
       //get users list from API
       //this should be implemented in services
       $http.get('/users')
@@ -20,22 +20,27 @@
           }
         });
         modalInstance.result.then(function(user) {
-        	$scope.user = user;
+          $scope.user = user;
         });
       };
     }])
-    .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', function($scope, $http, $uibModal, $uibModalInstance) {
-    	$scope.user = {
-    		'username': '',
-    		'password': null
-    	};
+    .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', function($scope, $http, $uibModal, $uibModalInstance, UserService) {
+      $scope.user = {
+        'username': '',
+        'password': null
+      };
       $scope.ok = function() {
-      	$http.post('/login', {username: $scope.user.username, password: $scope.user.password})
-      		.success(function(res) {
-      			if (res && res.username) {
-       				$uibModalInstance.close(res);
-      			} else {}
-      		});
+        UserService.login($scope.user, function(res) {
+            if (res && res.username) {
+              $uibModalInstance.close(res);
+            } else {}
+          })
+          // $http.post('/login', { username: $scope.user.username, password: $scope.user.password })
+          //   .success(function(res) {
+          //     if (res && res.username) {
+          //       $uibModalInstance.close(res);
+          //     } else {}
+          //   });
       };
 
       $scope.cancel = function() {
