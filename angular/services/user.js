@@ -18,7 +18,6 @@
         login: function(user, callback, errorCallback) {
           $http.post('/login', { username: user.username, password: user.password })
             .success(function(res) {
-              isRunning = false;
               if (callback) {
                 callback(res);
               }
