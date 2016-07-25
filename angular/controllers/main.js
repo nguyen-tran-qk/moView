@@ -34,9 +34,14 @@
       };
       $scope.login = function() {
         UserService.login($scope.user, function(res) {
-          if (res && res.body && res.body.user) {
+          if (res && res.meta && res.meta.code <= 300) {
+            $scope.errorMessage = '';
             $uibModalInstance.close(res.body.user);
-          } else {}
+          } else if (res && res.meta && res.meta.code >= 500) {
+            $scope.errorMessage = 'Server Error';
+          } else if (res && res.meta.code >= 400) {
+            $scope.errorMessage = res.meta.message;
+          }
         })
       };
 
