@@ -17,9 +17,9 @@ class MoviesController extends Controller
      */
     public function getMoviebyId($id = null) {
         if ($id == null) {
-            return Movie::orderBy('dateReleased', 'des')->get();
+            return self::makeResponse(Movie::orderBy('dateReleased', 'des')->get(), 200, '', '');
         } else {
-            return $this->show($id);
+            return self::makeResponse($this->show($id), 200, '', '');
         }
     }
 

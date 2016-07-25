@@ -17,9 +17,10 @@ class UserController extends Controller
      */
     public function getUserbyId($id = null) {
         if ($id == null) {
-            return User::orderBy('id', 'asc')->get();
+            return self::makeResponse(User::orderBy('id', 'asc')->get(), 200, '', '');
         } else {
-            return $this->show($id);
+            return self::makeResponse($this->show($id), 200, '', '');
+            return ;
         }
     }
 
