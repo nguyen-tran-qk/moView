@@ -32,16 +32,10 @@
         'username': '',
         'password': null
       };
-                // $http.post('/login', { username: $scope.user.username, password: $scope.user.password })
-          //   .success(function(res) {
-          //     if (res && res.username) {
-          //       $uibModalInstance.close(res);
-          //     } else {}
-          //   });
-      $scope.ok = function() {
+      $scope.login = function() {
         UserService.login($scope.user, function(res) {
-          if (res && res.username) {
-            $uibModalInstance.close(res);
+          if (res && res.body && res.body.user) {
+            $uibModalInstance.close(res.body.user);
           } else {}
         })
       };
