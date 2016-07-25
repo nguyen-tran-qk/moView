@@ -88,7 +88,6 @@ class UserController extends Controller
     *
     **/
     public function login(Request $request) {
-        // echo $request->input('username');
         $user = User::where('username', $request->input('username'))->first();
         if (isset($user)) {
             // echo $user;
