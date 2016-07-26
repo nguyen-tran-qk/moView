@@ -8,6 +8,10 @@
       //   $scope.usersList = res;
       // });
 
+      $scope.isActive = false;
+      $scope.activeButton = function() {
+        $scope.isActive = !$scope.isActive;
+      };
       //function to open Login modal, refer to ui-bootstrap docs for Modals
       $scope.openLogin = function() {
         var modalInstance = $uibModal.open({
