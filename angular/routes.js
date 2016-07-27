@@ -13,7 +13,16 @@
             }
           }
         })
+        .state('index.home', {
+          url: 'home',
+          views: {
+            'content': {
+              templateUrl: 'views/home.html',
+              controller: 'MainController'
+            }
+          }
+        })
     	  $urlRouterProvider
-    	    .otherwise('/');
+    	    .otherwise('/home');
     }]);
 }());

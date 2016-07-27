@@ -5,6 +5,7 @@
     <!-- <link href="/images/favicon.png" rel="shortcut icon"> -->
     <link rel="stylesheet" href="{!! asset('styles/vendor.css') !!}">
     <link rel="stylesheet" href="{!! asset('styles/app.css') !!}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <title>moView</title>
     <meta name="csrf-token" content='<?php echo csrf_token(); ?>'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,11 +14,12 @@
     <![endif]-->
 </head>
 <body>
-  <div ui-view="main" >
+  <div class="wrapper" ui-view="main" >
       <!-- <div class="loading"></div> -->
   </div>
 <script src="{!! asset('scripts/vendor.js') !!}"></script>
 <script src="{!! asset('scripts/app.js') !!}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 {{--livereload--}}
 @if ( Config::get('app.debug') )

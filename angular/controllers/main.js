@@ -1,14 +1,17 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers', [])
-    .controller('MainController', ['$scope', '$http', '$uibModal', 'UserService', function($scope, $http, $uibModal, UserService) {
+    .controller('MainController', ['$scope', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', function($scope, $http, $uibModal, $anchorScroll, $location, UserService) {
       $scope.user = {};
+      $scope.isActive = false;
       //get users list from API
       // UserService.getUserList(function(res) {
       //   $scope.usersList = res;
       // });
-
-      $scope.isActive = false;
+      $scope.gotoAnchor = function(x) {
+        $location.hash('footerwrap');
+        $anchorScroll();
+      };
       $scope.activeButton = function() {
         $scope.isActive = !$scope.isActive;
       };
