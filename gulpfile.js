@@ -14,7 +14,7 @@ gulp.task('build', function() {
       .bower()
       .angular('./angular/')
       .sass('./angular/styles/app.scss', 'public/styles')
-      .copy('./angular/fonts', 'public/styles')
+      .copy('./angular/fonts', 'public/fonts')
       .copy('./angular/images', 'public/images')
       .livereload([
         'public/scripts/vendor.js',
@@ -44,7 +44,7 @@ elixir(function(mix) {
     // .template('./angular/')
     .angular('./angular/')
     .sass('./angular/styles/app.scss', 'public/styles')
-    .copy('./angular/fonts', 'public/styles')
+    .copy('./angular/fonts', 'public/fonts')
     .copy('./angular/images', 'public/images')
     .copy('./angular/views', 'public/views')
     .livereload([
