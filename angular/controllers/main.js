@@ -15,6 +15,24 @@
       $scope.activeButton = function() {
         $scope.isActive = !$scope.isActive;
       };
+
+
+      $scope.myInterval = 5000;
+      $scope.noWrapSlides = false;
+      $scope.active = 0;
+      var slides = $scope.slides = [];
+      var currIndex = 0;
+      $scope.addSlide = function() {
+        var newWidth = window.screen.width + slides.length + 1;
+        slides.push({
+          image: 'http://lorempixel.com/' + newWidth + '/400',
+          text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
+          id: currIndex++
+        });
+      };
+      for (var i = 0; i < 4; i++) {
+        $scope.addSlide();
+      }
       //function to open Login modal, refer to ui-bootstrap docs for Modals
       $scope.openLogin = function() {
         var modalInstance = $uibModal.open({
