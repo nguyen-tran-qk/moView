@@ -17,16 +17,16 @@
       };
 
 
-      $scope.myInterval = 5000;
+      $scope.myInterval = 3000;
       $scope.noWrapSlides = false;
       $scope.active = 0;
-      var slides = $scope.slides = [];
+      $scope.slides = [];
       var currIndex = 0;
       $scope.addSlide = function() {
-        var newWidth = window.screen.width + slides.length + 1;
-        slides.push({
+        var newWidth = window.screen.width >= 1920 ? 1915 + $scope.slides.length + 1 : window.screen.width + $scope.slides.length + 1;
+        $scope.slides.push({
           image: 'http://lorempixel.com/' + newWidth + '/400',
-          text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
+          text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][$scope.slides.length % 4],
           id: currIndex++
         });
       };

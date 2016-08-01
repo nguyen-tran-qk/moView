@@ -9955,3 +9955,5 @@ ul#navigation li.mega-menu__nav-item:hover:before {
     width: 100%;
   }
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

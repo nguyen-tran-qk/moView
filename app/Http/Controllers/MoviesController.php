@@ -17,7 +17,7 @@ class MoviesController extends Controller
      */
     public function getMoviebyId($id = null) {
         if ($id == null) {
-            return self::makeResponse(Movie::orderBy('dateReleased', 'des')->get(), 200, '', '');
+            return self::makeResponse(Movie::orderBy('date_released', 'des')->get(), 200, '', '');
         } else {
             return self::makeResponse($this->show($id), 200, '', '');
         }
@@ -37,7 +37,7 @@ class MoviesController extends Controller
         $movie->duration = $request->input('duration');
         $movie->cast = $request->input('cast');
         $movie->director = $request->input('director');
-        $movie->dateReleased = $request->input('dateReleased');
+        $movie->date_released = $request->input('date_released');
         $movie->rating = $request->input('rating');
         $movie->trailer = $request->input('trailer');
         $movie->poster = $request->input('poster');
@@ -74,7 +74,7 @@ class MoviesController extends Controller
         $movie->duration = $request->input('duration');
         $movie->cast = $request->input('cast');
         $movie->director = $request->input('director');
-        $movie->dateReleased = $request->input('dateReleased');
+        $movie->date_released = $request->input('date_released');
         $movie->rating = $request->input('rating');
         $movie->trailer = $request->input('trailer');
         $movie->poster = $request->input('poster');
