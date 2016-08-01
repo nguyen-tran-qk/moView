@@ -20,7 +20,6 @@ class UserController extends Controller
             return self::makeResponse(User::orderBy('id', 'asc')->get(), 200, '', '');
         } else {
             return self::makeResponse($this->show($id), 200, '', '');
-            return ;
         }
     }
 
@@ -67,7 +66,7 @@ class UserController extends Controller
         $user->password = $request->input('password');
         $user->save();
 
-        return "Sucess updating user #" . $user->id;
+        return self::makeResponse(array('user' => array('id' => $user->id)), 200, '', '');
     }
 
     /**

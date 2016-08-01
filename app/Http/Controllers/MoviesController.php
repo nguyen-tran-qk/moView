@@ -68,26 +68,44 @@ class MoviesController extends Controller
     public function updateMovie(Request $request, $id) {
         $movie = Movie::find($id);
         $is_update = $request->input('update', false);
+        $user_role = $request->input('user_role');
+        $data = $request->input('data');
+
+        if (!$user_role) {
+            return self::makeResponse([], 400, 'Field "user_role" is required.', '');
+        }
 
         if (!$movie) {
             return self::makeResponse([], 404, 'Not Found', '');
         }
 
         if (is_update) {
-            $movie->name = $request->input('name');
-            $movie->description = $request->input('description');
-            $movie->duration = $request->input('duration');
-            $movie->cast = $request->input('cast');
-            $movie->director = $request->input('director');
-            $movie->date_released = $request->input('date_released');
-            $movie->rating = $request->input('rating');
-            $movie->trailer = $request->input('trailer');
-            $movie->poster = $request->input('poster');
-            $movie->save();
-            return self::makeResponse(array('movie' => array('id' => $movie->id)), 200, '', '');
+            if ($user_role == 32) {
+                if (!$data) {
+                    self:makeResponse([], 400, 'Missing data.', '');
+                }
+                $movie = $data;
+                $movie->save();
+                return self::makeResponse(array('id' => $movie->id), 200, '', '');
+            // $movie->name = $request->input('name');
+            // $movie->description = $request->input('description');
+            // $movie->duration = $request->input('duration');
+            // $movie->cast = $request->input('cast');
+            // $movie->director = $request->input('director');
+            // $movie->date_released = $request->input('date_released');
+            // $movie->rating = $request->input('rating');
+            // $movie->trailer = $request->input('trailer');
+            // $movie->poster = $request->input('poster');
+            } else { // user rates movie
+
+            }
         } else {
-            $movie->delete();
-            return self::makeResponse(array('id' => $movie->id), 200, 'Deleted.', '');
+            if ($user_role == 32) {
+                $movie->delete();
+                return self::makeResponse(array('id' => $movie->id), 200, 'Deleted.', '');
+            } else {
+                return self:makeResponse([], 403, 'Access denied.', '');
+            }
         }
 
 
