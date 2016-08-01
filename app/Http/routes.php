@@ -21,3 +21,5 @@ Route::post('/users/{id}', 'UserController@updateUser');
 Route::post('/login', 'UserController@login');
 
 Route::get('/movies/{id?}', 'MoviesController@getMoviebyId');
+Route::post('/movies', 'MoviesController@addNewMovie');
+Route::post('/movies/{id}', 'MoviesController@updateMovie'); // send with data object { update: true } if update, otherwise { update: null } to delete
