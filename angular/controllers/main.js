@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers', [])
-    .controller('MainController', ['$scope', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', function($scope, $http, $uibModal, $anchorScroll, $location, UserService) {
+    .controller('MainController', ['$scope', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $http, $uibModal, $anchorScroll, $location, UserService, MovieService) {
       $scope.user = {};
       $scope.isActive = false;
       //get users list from API
@@ -15,8 +15,10 @@
       $scope.activeButton = function() {
         $scope.isActive = !$scope.isActive;
       };
-
-
+      MovieService.getMovieList(function(res) {
+          $scope.movies = res;
+        })
+        // fake slide
       $scope.myInterval = 3000;
       $scope.noWrapSlides = false;
       $scope.active = 0;
