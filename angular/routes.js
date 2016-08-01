@@ -32,6 +32,15 @@
             }
           }
         })
+        .state('index.manage', {
+          url: 'manage',
+          views: {
+            'content': {
+              templateUrl: 'views/manage-movie.html',
+              controller: 'MainController'
+            }
+          }
+        })
       $urlRouterProvider
         .otherwise('/home');
     }]);
