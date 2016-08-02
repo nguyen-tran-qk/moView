@@ -19,7 +19,7 @@ class MoviesController extends Controller
      *
      * @return Response
      */
-    public function getMovieById($id = null) {
+    public function getMovieById(Request $request, $id = null) {
         $user_id = $request->input('user_id');
         if ($id == null) {
             $result = Movie::orderBy('date_released', 'des')->get();
@@ -27,7 +27,7 @@ class MoviesController extends Controller
             $result = $this->show($id);
         }
         if ($user_id) {
-            $result['user_rated'] = (new RatingsController)->getRatingByUser($user_id)
+            $result['user_rated'] = (new RatingsController)->getRatingByUser($user_id);
         }
         return self::makeResponse($result, 200, '', '');
     }
