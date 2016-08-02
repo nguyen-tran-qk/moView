@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers')
-    .controller('MainController', ['$scope', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $http, $uibModal, $anchorScroll, $location, UserService, MovieService) {
+    .controller('MainController', ['$scope', '$state', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $state, $http, $uibModal, $anchorScroll, $location, UserService, MovieService) {
       $scope.user = {};
       $scope.isActive = false;
       //get users list from API
@@ -16,9 +16,24 @@
         $scope.isActive = !$scope.isActive;
       };
       MovieService.getMovieList(function(res) {
-          $scope.movies = res;
-        })
-        // fake slide
+        if (res && res.meta.code <= 200) {
+          $scope.movies = res.body;
+          $scope.chunkedMovies = chunk($scope.movies, 2);
+        }
+      })
+
+      function chunk(arr, size) {
+        var newArr = [];
+        for (var i = 0; i < arr.length; i += size) {
+          newArr.push(arr.slice(i, i + size));
+        }
+        return newArr;
+      }
+
+      $scope.viewMovieDetail = function(id) {
+        $state.go('index.movie', { 'id': id });
+      };
+      // fake slide
       $scope.myInterval = 3000;
       $scope.noWrapSlides = false;
       $scope.active = 0;

@@ -23,12 +23,11 @@
           }
         })
         .state('index.movie', {
-          // url: '/movie/{id:int}',
-          url: 'movie',
+          url: 'movie/{id:int}',
           views: {
             'content': {
               templateUrl: 'views/movie-detail.html',
-              controller: 'MainController'
+              controller: 'MovieController'
             }
           }
         })

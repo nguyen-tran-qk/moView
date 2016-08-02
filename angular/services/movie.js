@@ -22,19 +22,14 @@
               }
             });
         },
-        getMovieInfo: function(callback, errorCallback) {
-          $http.get('/movies')
+        getMovieInfo: function(id, callback, errorCallback) {
+          $http.get('/movies/' + id)
             .success(function(res) {
-              if (res && res.body) {
-                if (res.body.uid) {
-                  user = res.body;
-                }
-                if (callback) {
-                  callback();
-                }
+              if (callback) {
+                callback(res);
               }
             })
-            .error(function(res) {
+            .error(function() {
               if (errorCallback) {
                 errorCallback();
               }
