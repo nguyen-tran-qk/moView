@@ -15,7 +15,7 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function getUserbyId($id = null) {
+    public function getUserById($id = null) {
         if ($id == null) {
             return self::makeResponse(User::orderBy('id', 'asc')->get(), 200, '', '');
         } else {

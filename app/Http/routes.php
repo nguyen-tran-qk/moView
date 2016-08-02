@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/users/{id?}', 'UserController@getUserbyId');
+Route::get('/users/{id?}', 'UserController@getUserById');
 Route::post('/users', 'UserController@addNewUser');
 Route::post('/users/{id}', 'UserController@updateUser');
 Route::post('/login', 'UserController@login');
 
-Route::get('/movies/{id?}', 'MoviesController@getMoviebyId');
-Route::post('/movies', 'MoviesController@addNewMovie');
+Route::get('/movies/{id?}', 'MoviesController@getMovieById');
+Route::post('/movies', 'MoviesController@addNewMovie'); // send with data object { data: <movie_obj> }
 Route::post('/movies/{id}', 'MoviesController@updateMovie'); 
-			// send with data object { update: true, user_role: <user_role> } if update, otherwise { update: null, user_role: <user_role> } to delete
-			// there are also { user_role: <user_role>, data: <movie> }, in which 'data' is requied only if Admin updates the movie; while 'user_role' is always required.
+			// send with data object { update: true } if update, otherwise { update: null } to delete
+			// there are also { user_role: <user_orle>, data: <movie_obj> }, in which 'data' is requied only if Admin updates the movie; while 'user_role' is always required.
