@@ -82,7 +82,7 @@ class MoviesController extends Controller
         if (is_update) {
             if ($user_role == 32) {
                 if (!$data) {
-                    self:makeResponse([], 400, 'Missing data.', '');
+                    self::makeResponse([], 400, 'Missing data.', '');
                 }
                 $movie = $data;
                 $movie->save();
@@ -104,7 +104,7 @@ class MoviesController extends Controller
                 $movie->delete();
                 return self::makeResponse(array('id' => $movie->id), 200, 'Deleted.', '');
             } else {
-                return self:makeResponse([], 403, 'Access denied.', '');
+                return self::makeResponse([], 403, 'Access denied.', '');
             }
         }
 
