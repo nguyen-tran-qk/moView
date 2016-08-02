@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('MoviewControllers', [])
+  angular.module('MoviewControllers')
     .controller('MainController', ['$scope', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $http, $uibModal, $anchorScroll, $location, UserService, MovieService) {
       $scope.user = {};
       $scope.isActive = false;

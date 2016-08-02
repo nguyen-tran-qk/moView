@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('MoviewServices', [])
+  angular.module('MoviewServices')
     .factory('MovieService', ['$http', '$q', function($http, $q) {
       var movie,
         data = {};
