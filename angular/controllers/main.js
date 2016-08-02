@@ -8,10 +8,10 @@
       // UserService.getUserList(function(res) {
       //   $scope.usersList = res;
       // });
-      $scope.gotoAnchor = function(x) {
-        $location.hash('footerwrap');
-        $anchorScroll();
-      };
+      // $scope.gotoAnchor = function(x) {
+      //   $location.hash('footerwrap');
+      //   $anchorScroll();
+      // };
       $scope.activeButton = function() {
         $scope.isActive = !$scope.isActive;
       };
