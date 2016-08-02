@@ -10,6 +10,7 @@ use App\Rating;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\RatingsController;
+use App\Http\Controllers\ReviewsController;
 use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
@@ -25,9 +26,10 @@ class MoviesController extends Controller
             $result = Movie::orderBy('date_released', 'des')->get();
         } else {
             $result = $this->show($id);
-        }
-        if ($user_id) {
-            $result['user_rated'] = (new RatingsController)->getRatingByUser($user_id);
+            $result['reviews'] = (new ReviewsController)->getReviewsByMovie($id);
+            if ($user_id) {
+                $result['user_rated'] = (new RatingsController)->getRatingByUser($user_id);
+            }
         }
         return self::makeResponse($result, 200, '', '');
     }
