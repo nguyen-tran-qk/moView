@@ -10,5 +10,24 @@ use App\Http\Controllers\Controller;
 
 class RatingsController extends Controller
 {
-    //
+	public function getRatingById($id = null) {
+        if ($id == null) {
+            return self::makeResponse(Rating::orderBy('id', 'asc')->get(), 200, '', '');
+        } else {
+            return self::makeResponse($this->show($id), 200, '', '');
+        }
+    }
+
+    public function addRating($movie_id, $user_id, $points) {
+    	$rating = new Rating;
+    	$rating->movie_id = $movie_id;
+    	$rating->user_id = $user_id;
+    	$rating->points = $points;
+    	$rating->save();
+        return self::makeResponse(array('id' => $rating->id), 200, 'New rating added', '');
+    }
+
+    public function getRatingByUser($user_id) {
+    	return Rating::where('user_id', $user_id)->first();
+    }
 }
