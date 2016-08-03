@@ -1,14 +1,20 @@
 <div class="modal-header">
-  <h2 class="form-signin-heading">Please sign in</h2>
-  <h2 ng-if="errorMessage" class="warning">{{errorMessage}}</h2>
+  <h2>Login <small> to do more.</small> </h2>
+  <small ng-if="errorMessage" class="errorMessage">{{errorMessage}}</small>
 </div>
 <div class="modal-body">
-  <form class="form-signin">
-    <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required="" ng-model="user.username">
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" ng-model="user.password">
-  </form>
+  <div class="form-group">
+    <div class="form-group">
+      <input type="text" name="username" id="username" class="form-control input-lg" placeholder="Username" ng-model="user.username" tabindex="1">
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" ng-model="user.password" tabindex="2">
+  </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="login()">Login</button>
-  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  <div class="col-xs-6 col-md-6">
+    <input value="Cancel" ng-click="cancel()" class="btn btn-primary btn-block btn-lg" tabindex="3">
+  </div>
+  <div class="col-xs-6 col-md-6"><a href ng-click="login()" class="btn btn-success btn-block btn-lg">Login</a></div>
 </div>

@@ -34,6 +34,19 @@
                 errorCallback();
               }
             });
+        },
+        addMovie: function(movie, callback, errorCallback) {
+          $http.post('/movies', movie)
+            .success(function(res) {
+              if (callback) {
+                callback(res);
+              }
+            })
+            .error(function() {
+              if (errorCallback) {
+                errorCallback();
+              }
+            });
         }
       };
     }]);

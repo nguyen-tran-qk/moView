@@ -36,7 +36,7 @@
           views: {
             'content': {
               templateUrl: 'views/manage-movie.html',
-              controller: 'MainController'
+              controller: 'MovieController'
             }
           }
         })

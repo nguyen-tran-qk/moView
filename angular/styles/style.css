@@ -825,7 +825,8 @@ table {
   padding-right: 15px;
   position: relative;
 }
-.movie-detail {
+.movie-container {
+  min-height: 100vh;
   margin-top: 70px;
 }
 @media (min-width: 768px) {
@@ -1623,9 +1624,9 @@ table {
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
 }
-.fade.in {
+/*.fade.in {
   opacity: 1;
-}
+}*/
 .collapse {
   display: none;
 }
