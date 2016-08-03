@@ -17,7 +17,7 @@
         <!-- <li><a ng-click="gotoAnchor()">ABOUT</a></li> -->
         <!-- <li><a ng-click="gotoAnchor()">CONTACT</a></li> -->
         <li ng-if="user.role" class="dropdown" ng-class="{'open': isActive}" ng-click="activeButton()">
-          <a href class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+          <a href class="dropdown-toggle" data-toggle="dropdown">{{user.username | uppercase}} <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href ng-click="$state.go('index.manage')">MANAGE MOVIES</a></li>
             <!-- <li><a href="single-post.html">SINGLE POST</a></li> -->

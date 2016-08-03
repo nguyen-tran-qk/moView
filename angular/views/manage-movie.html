@@ -13,7 +13,7 @@
         <h2 class="page-heading">All Movies</h2>
         <!-- <div class="container container--add"> -->
         <form id='search-form' method='get' class="search">
-          <input type="text" class="search__field" placeholder="Search" ng-model="searchText">
+          <input type="text" class="search__field" placeholder="Search" ng-model="query.name">
           <select name="sorting_item" id="search-sort" class="search__sort" tabindex="0">
             <option value="1" selected='selected'>By title</option>
             <option value="2">By year</option>
@@ -30,7 +30,7 @@
               <colgroup class="col-width">
                 <colgroup class="col-width-sm">
                   <colgroup class="col-width">
-                    <tr ng-repeat="movie in movies | filter:searchText" class="rates rates--top">
+                    <tr ng-repeat="movie in movies | filter:query" class="rates rates--top">
                       <td class="rates__obj"><a href="#" class="rates__obj-name">{{$index +1}}. {{movie.name}} </a></td>
                       <!-- <td class="rates__vote">233 546 votes</td> -->
                       <td class="rates__result">{{movie.rating}}</td>
