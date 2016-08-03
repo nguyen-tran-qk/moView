@@ -14,7 +14,6 @@
       <ul class="nav navbar-nav">
         <li><a ng-click="$state.go('index.home')">HOME</a></li>
         <li ng-if="!user.role" ng-click="openLogin()"><a >LOGIN</a></li>
-        <li><a ng-click="openLogin()">LOGIN</a></li>
         <!-- <li><a ng-click="gotoAnchor()">ABOUT</a></li> -->
         <!-- <li><a ng-click="gotoAnchor()">CONTACT</a></li> -->
         <li ng-if="user.role" class="dropdown" ng-class="{'open': isActive}" ng-click="activeButton()">
