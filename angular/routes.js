@@ -27,7 +27,7 @@
           views: {
             'content': {
               templateUrl: 'views/movie-detail.html',
-              controller: 'MovieController'
+              controller: 'DetailController'
             }
           }
         })
