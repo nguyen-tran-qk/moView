@@ -14,16 +14,11 @@
           }
         }
       });
-      MovieService.getMovieList(function(res) {
-        if (res && res.meta.code <= 200) {
-          $scope.movies = res.body;
-        }
-      });
       $scope.addComment = function() {
         if ($scope.user && $scope.user.role) {
 
         } else {
-          // $scope.openLogin();
+          $scope.openLogin();
         }
       };
     }])

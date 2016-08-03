@@ -129,8 +129,8 @@
   <h2 id='target' class="page-heading heading--outcontainer">Now in the cinema</h2>
   <div class="col-sm-12">
     <div class="row">
-      <div ng-repeat="rows in chunkedMovies | filter: query" ng-class-odd="'movie--test--left'" ng-class-even="'movie--test--right'" class="col-sm-8 col-md-9">
-        <div ng-repeat="movie in rows" class="movie movie--test movie--test--dark">
+      <div ng-repeat="rows in chunkedMovies" ng-class-odd="'movie--test--left'" ng-class-even="'movie--test--right'" class="col-sm-8 col-md-9">
+        <div ng-repeat="movie in rows | filter: query" class="movie movie--test movie--test--dark">
           <div class="movie__images">
             <a href ng-click="viewMovieDetail(movie.id)" class="movie-beta__link">
               <div ng-style="{'background': 'url(' + movie.poster +') no-repeat center center', 'background-size': 'cover', 'height': '212px'}"></div>
