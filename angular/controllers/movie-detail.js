@@ -19,5 +19,12 @@
           $scope.movies = res.body;
         }
       });
+      $scope.addComment = function() {
+        if ($scope.user && $scope.user.role) {
+
+        } else {
+          // $scope.openLogin();
+        }
+      };
     }])
 }());
