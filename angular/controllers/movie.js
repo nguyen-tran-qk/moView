@@ -38,8 +38,13 @@
         $uibModalInstance.dismiss('cancel');
       };
       $scope.addMovie = function() {
-        MovieService.addMovie($scope.movie);
-        $uibModalInstance.dismiss('cancel');
+        MovieService.addMovie($scope.movie, function(res) {
+          if (res && res.body && res.body.id) {
+            $uibModalInstance.dismiss('cancel');
+          } else {
+            // do something
+          }
+        });
       };
     }]);
 }());

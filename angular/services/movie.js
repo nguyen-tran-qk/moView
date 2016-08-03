@@ -36,7 +36,7 @@
             });
         },
         addMovie: function(movie, callback, errorCallback) {
-          $http.post('/movies', movie)
+          $http.post('/movies', {data: movie})
             .success(function(res) {
               if (callback) {
                 callback(res);

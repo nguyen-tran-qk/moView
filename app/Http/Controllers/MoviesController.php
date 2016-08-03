@@ -42,11 +42,12 @@ class MoviesController extends Controller
      */
     public function addNewMovie(Request $request) {
         $movie = new Movie;
-        $data = $request->input('data');
+        $data = $request->input('data', false);
         if (!$data) {
             self::makeResponse([], 400, 'Missing data.', '');
         }
-        foreach ($data->toArray() as $key => $value) {
+        $movie->timestamps = false;
+        foreach ($data as $key => $value) {
             if ($movie->$key !== $value) {
                 $movie->$key = $value;
             }
