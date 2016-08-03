@@ -3,6 +3,7 @@
   angular.module('MoviewControllers')
     .controller('MainController', ['$scope', '$state', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $state, $http, $uibModal, $anchorScroll, $location, UserService, MovieService) {
       $scope.user = {};
+      $scope.$state = $state;
       $scope.isActive = false;
       //get users list from API
       // UserService.getUserList(function(res) {
