@@ -35,8 +35,21 @@
               }
             });
         },
+        manageMovie: function(userId, id, movie, callback, errorCallback) {
+          $http.post('/movies/' + id, { user_id: userId, update: movie })
+            .success(function(res) {
+              if (callback) {
+                callback(res);
+              }
+            })
+            .error(function() {
+              if (errorCallback) {
+                errorCallback();
+              }
+            });
+        },
         addMovie: function(movie, callback, errorCallback) {
-          $http.post('/movies', {data: movie})
+          $http.post('/movies', { data: movie })
             .success(function(res) {
               if (callback) {
                 callback(res);

@@ -16,12 +16,15 @@
       $scope.activeButton = function() {
         $scope.isActive = !$scope.isActive;
       };
-      MovieService.getMovieList(function(res) {
-        if (res && res.meta.code <= 200) {
-          $scope.movies = res.body;
-          $scope.chunkedMovies = chunk($scope.movies, 2);
-        }
-      })
+      $scope.refreshMovie = function() {
+        MovieService.getMovieList(function(res) {
+          if (res && res.meta.code <= 200) {
+            $scope.movies = res.body;
+            $scope.chunkedMovies = chunk($scope.movies, 2);
+          }
+        })
+      };
+      $scope.refreshMovie();
 
       function chunk(arr, size) {
         var newArr = [];

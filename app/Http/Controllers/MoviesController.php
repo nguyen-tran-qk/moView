@@ -90,7 +90,7 @@ class MoviesController extends Controller
             return self::makeResponse([], 404, 'Not Found', '');
         }
 
-        if (is_update) {
+        if ($is_update) {
             if ($user->role == 32) {
                 if (!$data) {
                     self::makeResponse([], 400, 'Missing data.', '');
@@ -113,7 +113,7 @@ class MoviesController extends Controller
             $movie->save();
             return self::makeResponse(array('id' => $movie->id), 200, '', '');
         } else {
-            if ($user_role == 32) {
+            if ($user->role == 32) {
                 $movie->delete();
                 return self::makeResponse(array('id' => $movie->id), 200, 'Deleted.', '');
             } else {

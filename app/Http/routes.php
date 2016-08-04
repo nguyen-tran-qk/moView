@@ -24,4 +24,4 @@ Route::get('/movies/{id?}', 'MoviesController@getMovieById');
 Route::post('/movies', 'MoviesController@addNewMovie'); // send with data object { data: <movie_obj> }
 Route::post('/movies/{id}', 'MoviesController@updateMovie'); 
 			// send with data object { update: true } if update, otherwise { update: null } to delete
-			// there are also { user_role: <user_orle>, data: <movie_obj> }, in which 'data' is requied only if Admin updates the movie; while 'user_role' is always required.
+			// there are also { user_id: <user_id>, data: <movie_obj> }, in which 'data' is requied only if Admin updates the movie; while 'user_id' is always required.
