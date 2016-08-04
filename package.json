@@ -28,5 +28,9 @@
   },
   "scripts": {
     "postinstall": "bower install && gulp --production"
+  },
+  "engines": {
+    "node": "4.4.0",
+    "npm": "2.14.20"
   }
 }
