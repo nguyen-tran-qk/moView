@@ -13,11 +13,14 @@
           user = value;
         },
         isLoggedIn: function() {
-          return (user) ? user : false;
+          return (localStorage.user) ? JSON.parse(localStorage.user) : false;
         },
         login: function(user, callback, errorCallback) {
           $http.post('/login', { username: user.username, password: user.password })
             .success(function(res) {
+              if (res.body.user) {
+                localStorage.setItem('user', JSON.stringify(res.body.user));
+              }
               if (callback) {
                 callback(res);
               }
@@ -29,18 +32,19 @@
             });
         },
         logOut: function(callback, errorCallback) {
-          $http.get('/users/sign-out')
-            .success(function(res) {
-              user = null;
-              if (callback) {
-                callback(res);
-              }
-            })
-            .error(function() {
-              if (errorCallback) {
-                errorCallback();
-              }
-            });
+          localStorage.removeItem('user');
+          // $http.get('/users/sign-out')
+          //   .success(function(res) {
+          //     user = null;
+          //     if (callback) {
+          //       callback(res);
+          //     }
+          //   })
+          //   .error(function() {
+          //     if (errorCallback) {
+          //       errorCallback();
+          //     }
+          //   });
         },
         getUserList: function(callback, errorCallback) {
           $http.get('/users')

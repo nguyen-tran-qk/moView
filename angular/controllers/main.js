@@ -2,7 +2,7 @@
   'use strict';
   angular.module('MoviewControllers')
     .controller('MainController', ['$scope', '$state', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $state, $http, $uibModal, $anchorScroll, $location, UserService, MovieService) {
-      $scope.user = {};
+      $scope.user = UserService.isLoggedIn();
       $scope.$state = $state;
       $scope.isActive = false;
       //get users list from API
@@ -67,6 +67,10 @@
           $scope.user = user;
         });
       };
+
+      $scope.logOut = function() {
+        UserService.logOut();
+      }
     }])
     .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', function($scope, $http, $uibModal, $uibModalInstance, UserService) {
       $scope.user = {
