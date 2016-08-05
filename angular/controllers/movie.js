@@ -6,7 +6,7 @@
         $state.go('index.home');
       };
       $scope.deleteMovie = function(userId, movieId) {
-        MovieService.manageMovie(userId, movieId, null, function(res) {
+        MovieService.manageMovie(userId, movieId, null, false, function(res) {
           if (res && res.meta.code <= 200) {
             $scope.refreshMovie();
           } else {
@@ -42,7 +42,7 @@
       };
       $scope.addMovie = function() {
         if ($scope.isUpdate) {
-          MovieService.manageMovie($scope.user.id, $scope.movie.id, $scope.movie, function(res) {
+          MovieService.manageMovie($scope.user.id, $scope.movie.id, $scope.movie, true, function(res) {
             if (res) {
               $uibModalInstance.close(res);
             }

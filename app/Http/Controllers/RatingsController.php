@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Rating
+use App\Rating;
 use App\Http\Controllers\Controller;
 
 class RatingsController extends Controller
@@ -23,6 +23,7 @@ class RatingsController extends Controller
     	$rating->movie_id = $movie_id;
     	$rating->user_id = $user_id;
     	$rating->points = $points;
+        $rating->timestamps = false;
     	$rating->save();
         return self::makeResponse(array('id' => $rating->id), 200, 'New rating added', '');
     }

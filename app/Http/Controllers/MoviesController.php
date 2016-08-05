@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
 {
+    // use GetUser;
     /**
      * Display a listing of the resource.
      *
@@ -79,15 +80,12 @@ class MoviesController extends Controller
     public function updateMovie(Request $request, $id) {
         $movie = Movie::find($id);
         $is_update = $request->input('update', false);
-        $user_id = $request->input('user_id', false);
+        $user = DB::table('users')->where('id', $request->input('user_id'))->first();
         $data = $request->input('data');
         $points = $request->input('points');
 
-        if (!$user_id) {
+        if (!$user) {
             return self::makeResponse([], 400, 'Data "user_id" is required.', '');
-        } else {
-            $user = (new UserController)->show($user_id);
-            echo $user;
         }
 
         if (!$movie) {
@@ -99,7 +97,7 @@ class MoviesController extends Controller
                 if (!$data) {
                     self::makeResponse([], 400, 'Missing data.', '');
                 }
-                foreach ($data->toArray() as $key => $value) {
+                foreach ($data as $key => $value) {
                     if ($movie->$key !== $value) {
                         $movie->$key = $value;
                     }
@@ -114,6 +112,7 @@ class MoviesController extends Controller
                     $movie->rating = $this->getRating($movie->id);
                 }
             }
+            $movie->timestamps = false;
             $movie->save();
             return self::makeResponse(array('id' => $movie->id), 200, '', '');
         } else {

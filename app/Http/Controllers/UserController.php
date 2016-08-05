@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    // use GetUser;
     /**
      * Display a listing of the resource.
      *
@@ -48,9 +49,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id) {
-        return User::find($id);
-    }
+    // public function show($id) {
+    //     return User::find($id);
+    // }
 
     /**
      * Update the specified resource in storage.

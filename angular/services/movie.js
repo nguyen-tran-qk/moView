@@ -35,8 +35,8 @@
               }
             });
         },
-        manageMovie: function(userId, id, movie, callback, errorCallback) {
-          $http.post('/movies/' + id, { user_id: userId, update: movie })
+        manageMovie: function(userId, id, movie, isUpdate, callback, errorCallback) {
+          $http.post('/movies/' + id, { user_id: userId, update: isUpdate, data: movie })
             .success(function(res) {
               if (callback) {
                 callback(res);
