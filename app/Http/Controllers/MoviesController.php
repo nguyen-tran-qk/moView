@@ -11,6 +11,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
@@ -78,12 +79,15 @@ class MoviesController extends Controller
     public function updateMovie(Request $request, $id) {
         $movie = Movie::find($id);
         $is_update = $request->input('update', false);
-        $user = User::find($request->input('user_id'));
+        $user_id = $request->input('user_id', false);
         $data = $request->input('data');
         $points = $request->input('points');
 
-        if (!$user) {
+        if (!$user_id) {
             return self::makeResponse([], 400, 'Data "user_id" is required.', '');
+        } else {
+            $user = (new UserController)->show($user_id);
+            echo $user;
         }
 
         if (!$movie) {
