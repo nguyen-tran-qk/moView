@@ -70,6 +70,7 @@
 
       $scope.logOut = function() {
         UserService.logOut();
+        $scope.user = UserService.isLoggedIn();
       }
     }])
     .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', function($scope, $http, $uibModal, $uibModalInstance, UserService) {
