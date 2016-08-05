@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers')
-    .controller('MovieController', ['$scope', '$sce', '$http', '$uibModal', '$stateParams', '$state', 'UserService', 'MovieService', function($scope, $sce, $http, $uibModal, $stateParams, $state, UserService, MovieService) {
+    .controller('MovieController', ['$scope', '$uibModal', 'MovieService', function($scope, $uibModal, MovieService) {
       if ($scope.user.role !== 32) {
         $state.go('index.home');
       };
@@ -14,12 +14,14 @@
           }
         })
       };
-      $scope.openMovieModal = function() {
+      $scope.openMovieModal = function(movie) {
         var modalInstance = $uibModal.open({
           templateUrl: 'views/movie-popup.html',
           controller: 'PopupController',
+          size: 'lg',
           resolve: {
-            // user: function
+            movie: movie,
+            user: $scope.user
           }
         });
         modalInstance.result.then(function(movie) {
@@ -29,19 +31,31 @@
         });
       };
     }])
-    .controller('PopupController', ['$scope', '$rootScope', '$uibModal', '$uibModalInstance', 'MovieService', function($scope, $rootScope, $uibModal, $uibModalInstance, MovieService) {
+    .controller('PopupController', ['$scope', '$uibModal', '$uibModalInstance', 'MovieService', 'movie', 'user', function($scope, $uibModal, $uibModalInstance, MovieService, movie, user) {
+      if (movie && user) {
+        $scope.isUpdate = true;
+        $scope.movie = movie;
+        $scope.user = user;
+      }
       $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
       };
       $scope.addMovie = function() {
-        MovieService.addMovie($scope.movie, function(res) {
-          if (res && res.body && res.body.id) {
-            $uibModalInstance.dismiss('cancel');
-
-          } else {
-            // do something
-          }
-        });
+        if ($scope.isUpdate) {
+          MovieService.manageMovie($scope.user.id, $scope.movie.id, $scope.movie, function(res) {
+            if (res) {
+              $uibModalInstance.close(res);
+            }
+          })
+        } else {
+          MovieService.addMovie($scope.movie, function(res) {
+            if (res && res.body && res.body.id) {
+              $uibModalInstance.close(res.body.id);
+            } else {
+              console.log('Something went wrong, the server diededededededed');
+            }
+          });
+        }
       };
     }]);
 }());
