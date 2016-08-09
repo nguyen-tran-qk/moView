@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
 {
-    // use GetUser;
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +23,11 @@ class MoviesController extends Controller
      */
     public function getMovieById(Request $request, $id = null) {
         $user_id = $request->input('user_id');
+        $q = $request->input('q');
+        if ($q) {
+            $result = Movie::whereRaw("name like '%" . $q . "%'")->get();
+            return self::makeResponse($result, 200, '', '');
+        }
         if ($id == null) {
             $result = Movie::orderBy('date_released', 'des')->get();
         } else {
