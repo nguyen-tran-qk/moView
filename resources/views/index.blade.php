@@ -14,8 +14,11 @@
     <![endif]-->
 </head>
 <body>
-  <div class="wrapper" ui-view="main" >
+  <div class="wrapper" ui-view="main" ng-show="$pageFinishedLoading">
       <!-- <div class="loading"></div> -->
+  </div>
+  <div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
   </div>
 <script src="{!! asset('scripts/vendor.js') !!}"></script>
 <script src="{!! asset('scripts/app.js') !!}"></script>

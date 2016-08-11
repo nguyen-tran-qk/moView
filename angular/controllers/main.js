@@ -1,10 +1,11 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers')
-    .controller('MainController', ['$scope', '$state', '$http', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $state, $http, $uibModal, $anchorScroll, $location, UserService, MovieService) {
+    .controller('MainController', ['$scope', '$rootScope', '$state', '$http', '$timeout', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $rootScope, $state, $http, $timeout, $uibModal, $anchorScroll, $location, UserService, MovieService) {
       $scope.user = UserService.isLoggedIn();
       $scope.$state = $state;
       $scope.isActive = false;
+      $rootScope.$pageFinishedLoading = false;
       //get users list from API
       // UserService.getUserList(function(res) {
       //   $scope.usersList = res;
@@ -21,6 +22,9 @@
           if (res && res.meta.code <= 200) {
             $scope.movies = res.body;
             $scope.chunkedMovies = chunk($scope.movies, 2);
+            $timeout(function() {
+              $rootScope.$pageFinishedLoading = true;
+            }, 1000);
           }
         })
       };
