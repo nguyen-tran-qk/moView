@@ -71,7 +71,6 @@
           $scope.user = user;
         });
       };
-
       $scope.logOut = function() {
         UserService.logOut();
         $scope.user = UserService.isLoggedIn();
@@ -94,7 +93,6 @@
           }
         })
       };
-
       $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
       };

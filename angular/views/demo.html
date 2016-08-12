@@ -1,0 +1,44 @@
+<section class="container movie-container">
+  <h1>DEMO SITE</h1>
+  <a ng-if="!user" href ng-click="openDemoLogin()" class="btn btn-primary btn-lg">Login</a>
+  <a ng-if="user" href ng-click="logout()" class="btn btn-warning btn-lg">Logout</a>
+  <h1 ng-if="user">{{user.name}} <span ng-if="user.login">Logged in with google</span><span ng-if="!user.login">logged in with facebook</span></h1>
+  <form class="well form-horizontal">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Your profile</legend>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">First Name</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="first_name" placeholder="First Name" class="form-control" type="text" ng-model="user.name">
+          </div>
+        </div>
+      </div>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Last Name</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="last_name" placeholder="Last Name" class="form-control" type="text" ng-model="user.last_name">
+          </div>
+        </div>
+      </div>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">E-Mail</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input name="email" placeholder="E-Mail Address" class="form-control" type="text" ng-model="user.email">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  </div>
+  <!-- /.container -->
+</section>

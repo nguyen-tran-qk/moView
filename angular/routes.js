@@ -31,6 +31,15 @@
             }
           }
         })
+        .state('index.demo', {
+          url: 'demo',
+          views: {
+            'content': {
+              templateUrl: 'views/demo.html',
+              controller: 'DemoController'
+            }
+          }
+        })
         .state('index.manage', {
           url: 'manage',
           views: {

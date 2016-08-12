@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h2>Login <small> to do more.</small> </h2>
+  <small ng-if="errorMessage" class="errorMessage">{{errorMessage}}</small>
+</div>
+<div class="modal-body">
+  <!--  <div class="form-group">
+    <div class="form-group">
+      <input type="text" name="username" id="username" class="form-control input-lg" placeholder="Username" ng-model="user.username" tabindex="1">
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" ng-model="user.password" tabindex="2">
+  </div> -->
+</div>
+<div class="modal-footer">
+  <div class="col-xs-6 col-md-6">
+    <google-sign-in-button on-sign-in="onSignIn(response)" g-client-id="16234131622-pmjdusc75n1s8b885banj766qarbu4v4.apps.googleusercontent.com"></google-sign-in-button>
+  </div>
+  <div class="col-xs-6 col-md-6"><a href ng-click="fbLogin()" class="btn btn-primary btn-block btn-lg">Facebook</a></div>
+</div>
