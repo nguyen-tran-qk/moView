@@ -8498,8 +8498,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   float: right;
 }
 .movie--test--right .movie__images:before {
-  border-width: 20px 20px  0 0;
-  left: 0;
+  border-width: 0 20px  20px 0;
+  left: -11px;
+  transform: skewX(-45deg);
 }
 .movie--test--right .movie__images:after {
   left: 14px;
