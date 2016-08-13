@@ -27,7 +27,7 @@
           }
         })
       };
-      // $scope.refreshMovie(); // un-comment after demo
+      $scope.refreshMovie(); // un-comment after demo
       $timeout(function() { // remove after demo
         $rootScope.$pageFinishedLoading = true;
       }, 1000);

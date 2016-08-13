@@ -48,6 +48,19 @@
               }
             });
         },
+        addRating: function(userId, id, points, isUpdate, callback, errorCallback) {
+          $http.post('/movies/' + id, { user_id: userId, update: isUpdate, points: points })
+            .success(function(res) {
+              if (callback) {
+                callback(res);
+              }
+            })
+            .error(function() {
+              if (errorCallback) {
+                errorCallback();
+              }
+            });
+        },
         addMovie: function(movie, callback, errorCallback) {
           $http.post('/movies', { data: movie })
             .success(function(res) {
