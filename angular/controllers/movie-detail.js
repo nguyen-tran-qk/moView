@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers')
-    .controller('DetailController', ['$scope', '$sce', '$http', '$uibModal', '$stateParams', '$state', 'UserService', 'MovieService', function($scope, $sce, $http, $uibModal, $stateParams, $state, UserService, MovieService) {
+    .controller('DetailController', ['$scope', '$rootScope', '$timeout', '$sce', '$uibModal', '$stateParams', '$state', 'UserService', 'MovieService', function($scope, $rootScope, $timeout, $sce, $uibModal, $stateParams, $state, UserService, MovieService) {
+      $rootScope.$pageFinishedLoading = false;
       $scope.max = 5;
       $scope.isReadonly = false;
 
@@ -26,7 +27,7 @@
       $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src);
       };
-      MovieService.getMovieInfo(parseInt($stateParams.id), function(res) {
+      MovieService.getMovieInfo(parseInt($stateParams.id), $scope.user.id, function(res) {
         if (res && res.meta.code <= 200) {
           $scope.movieDetail = res.body;
           $scope.movieDetail.points = ($scope.movieDetail.rating * 50) / 100;
@@ -34,6 +35,9 @@
             $scope.movieDetail.trailer = $scope.movieDetail.trailer.replace('watch?v=', 'embed/');
             $scope.movieDetail.trailer = $scope.movieDetail.trailer.replace('https:', '');
           }
+          $timeout(function() {
+            $rootScope.$pageFinishedLoading = true;
+          }, 1000);
         }
       });
       $scope.addComment = function() {

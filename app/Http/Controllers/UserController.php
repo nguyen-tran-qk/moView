@@ -93,6 +93,7 @@ class UserController extends Controller
         if (isset($user)) {
             // echo $user;
            if ($user->password == $request->input('password')) {
+                $request->session()->put('user_id', $user->id);
                 return self::makeResponse(array('user' => $user), 200, '', '');
                // return $user;
            } else {
@@ -101,5 +102,9 @@ class UserController extends Controller
         } else {
             return self::makeResponse([], 404, 'Invalid username/password', '');
         }
+    }
+    public function logout(Request $request) {
+        $request->session()->flush();
+        return self::makeResponse([], 200, '', '');
     }
 }

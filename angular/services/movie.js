@@ -22,8 +22,8 @@
               }
             });
         },
-        getMovieInfo: function(id, callback, errorCallback) {
-          $http.get('/movies/' + id)
+        getMovieInfo: function(id, user_id, callback, errorCallback) {
+          $http.get('/movies/' + id, {user_id: user_id})
             .success(function(res) {
               if (callback) {
                 callback(res);
