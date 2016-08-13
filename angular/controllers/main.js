@@ -8,7 +8,10 @@
         });
       });
 
-      $scope.user = UserService.isLoggedIn();
+      // $scope.user = UserService.isLoggedIn();
+      UserService.isLoggedIn(function(res) {
+        $scope.user = res;
+      })
       $scope.$state = $state;
       $scope.isActive = false;
       $rootScope.$pageFinishedLoading = false;

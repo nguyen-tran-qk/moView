@@ -12,8 +12,19 @@
         setUser: function(value) {
           user = value;
         },
-        isLoggedIn: function() {
-          return (localStorage.user) ? JSON.parse(localStorage.user) : false;
+        isLoggedIn: function(callback, errorCallback) {
+          // return (localStorage.user) ? JSON.parse(localStorage.user) : false;
+          $http.get('/users')
+            .success(function(res) {
+              if (callback) {
+                callback(res);
+              }
+            })
+            .error(function() {
+              if (errorCallback) {
+                errorCallback();
+              }
+            });
         },
         getFacebookInfo: function(token) {
           var deferred = $q.defer();
