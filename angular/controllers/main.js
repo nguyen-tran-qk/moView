@@ -27,10 +27,10 @@
           }
         })
       };
-      // $scope.refreshMovie(); // un-comment after demo
-      $timeout(function() { // remove after demo
-        $rootScope.$pageFinishedLoading = true;
-      }, 1000);
+      $scope.refreshMovie(); // un-comment after demo
+      // $timeout(function() { // remove after demo
+      //   $rootScope.$pageFinishedLoading = true;
+      // }, 1000);
 
       function chunk(arr, size) {
         var newArr = [];

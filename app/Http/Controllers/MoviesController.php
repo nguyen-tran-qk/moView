@@ -22,7 +22,7 @@ class MoviesController extends Controller
      * @return Response
      */
     public function getMovieById(Request $request, $id = null) {
-        $user_id = $request->input('user_id');
+        $user_id = $request->session()->get('user_id', false);
         $q = $request->input('q');
         if ($q) {
             $result = Movie::whereRaw("name like '%" . $q . "%'")->get();
@@ -84,12 +84,12 @@ class MoviesController extends Controller
     public function updateMovie(Request $request, $id) {
         $movie = Movie::find($id);
         $is_update = $request->input('update', false);
-        $user = DB::table('users')->where('id', $request->input('user_id'))->first();
+        $user = DB::table('users')->where('id', $request->session()->get('user_id'))->first();
         $data = $request->input('data');
         $points = $request->input('points');
 
         if (!$user) {
-            return self::makeResponse([], 400, 'Data "user_id" is required.', '');
+            return self::makeResponse([], 401, 'Unauthorized user.', '');
         }
 
         if (!$movie) {
@@ -138,13 +138,13 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function deleteMovie(Request $request) {
-        $movie = Movie::find($request->input('id'));
+    // public function deleteMovie(Request $request) {
+    //     $movie = Movie::find($request->input('id'));
 
-        $movie->delete();
+    //     $movie->delete();
 
-        return self::makeResponse(array('id' => $movie->id), 200, '', '');
-    }
+    //     return self::makeResponse(array('id' => $movie->id), 200, '', '');
+    // }
 
     /** 
      * Get the average rating of the movie
