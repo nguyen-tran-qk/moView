@@ -2,23 +2,24 @@
   'use strict';
   angular.module('MoviewControllers')
     .controller('MainController', ['$scope', '$rootScope', '$state', '$http', '$timeout', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $rootScope, $state, $http, $timeout, $uibModal, $anchorScroll, $location, UserService, MovieService) {
+      $rootScope.$pageFinishedLoading = false;
       gapi.load('auth2', function() { //load in the auth2 api's, without it gapi.auth2 will be undefined
         gapi.auth2.init({
           client_id: '16234131622-pmjdusc75n1s8b885banj766qarbu4v4.apps.googleusercontent.com'
         });
       });
 
-      // $scope.user = UserService.isLoggedIn();
-      UserService.isLoggedIn(function(res) {
-        $scope.user = res;
-      })
+      $scope.initApp = function() {
+        // $scope.user = UserService.isLoggedIn();
+        UserService.isLoggedIn(function(res) {
+          $scope.user = res.body;
+        });
+        $scope.refreshMovie();
+      };
+
       $scope.$state = $state;
       $scope.isActive = false;
-      $rootScope.$pageFinishedLoading = false;
 
-      $scope.activeButton = function() {
-        $scope.isActive = !$scope.isActive;
-      };
       $scope.refreshMovie = function() {
         MovieService.getMovieList(function(res) {
           if (res && res.meta.code <= 200) {
@@ -30,10 +31,12 @@
           }
         })
       };
-      $scope.refreshMovie(); // un-comment after demo
-      $timeout(function() { // remove after demo
-        $rootScope.$pageFinishedLoading = true;
-      }, 1000);
+      $scope.activeButton = function() {
+        $scope.isActive = !$scope.isActive;
+      };
+      // $timeout(function() { // remove after demo
+      //   $rootScope.$pageFinishedLoading = true;
+      // }, 1000);
 
       function chunk(arr, size) {
         var newArr = [];
@@ -80,6 +83,7 @@
         UserService.logOut();
         $scope.user = UserService.isLoggedIn();
       }
+      $scope.initApp(); // un-comment after demo
     }])
     .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', function($scope, $http, $uibModal, $uibModalInstance, UserService) {
       $scope.user = {

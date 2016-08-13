@@ -40,9 +40,9 @@
         login: function(user, callback, errorCallback) {
           $http.post('/login', { username: user.username, password: user.password })
             .success(function(res) {
-              if (res.body.user) {
-                localStorage.setItem('user', JSON.stringify(res.body.user));
-              }
+              // if (res.body.user) {
+                // localStorage.setItem('user', JSON.stringify(res.body.user));
+              // }
               if (callback) {
                 callback(res);
               }
@@ -67,7 +67,7 @@
             });
         },
         logOut: function(callback, errorCallback) {
-          localStorage.removeItem('user');
+          // localStorage.removeItem('user');
           // $http.get('/users/sign-out')
           //   .success(function(res) {
           //     user = null;
