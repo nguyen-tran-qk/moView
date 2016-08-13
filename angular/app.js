@@ -25,5 +25,4 @@
       }(document, 'script', 'facebook-jssdk'));
     }
   ]);
-
 }());

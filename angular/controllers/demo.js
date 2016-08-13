@@ -2,6 +2,7 @@
   'use strict';
   angular.module('MoviewControllers')
     .controller('DemoController', ['$scope', '$uibModal', '$state', 'UserService', function($scope, $uibModal, $state, UserService) {
+      $scope.user = (localStorage.user) ? JSON.parse(localStorage.user) : false;
       $scope.openDemoLogin = function() {
         var modalInstance = $uibModal.open({
           templateUrl: 'views/demo-login.html',
@@ -19,6 +20,7 @@
           var auth2 = gapi.auth2.getAuthInstance();
           auth2.signOut().then(function() {
             console.log('User signed out.');
+            auth2.disconnect();
             $scope.user = '';
             $state.reload();
           });
@@ -28,6 +30,7 @@
             $state.reload();
           });
         }
+        localStorage.removeItem('user');
       }
     }])
     .controller('DemoLoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', function($scope, $http, $uibModal, $uibModalInstance, UserService) {
@@ -38,42 +41,43 @@
         }, { scope: 'public_profile,email' });
       }
       $scope.getFacebookInfo = function() {
-        var user = UserService.getFacebookInfo($scope.accessToken)
+        var user = UserService.getFacebookInfo($scope.accessToken);
+        localStorage.setItem('user', JSON.stringify(user));
         $uibModalInstance.close(user);
       }
       $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
       };
-      $scope.onSignIn = function(res) {
-        var user = {
-          name: res.wc.wc,
-          last_name: res.wc.Na,
-          email: res.wc.hg,
-          login: 'google'
+      $scope.options = {
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': function(res) {
+          var user = {
+            name: res.wc.Za,
+            last_name: res.wc.Na,
+            email: res.wc.hg,
+            login: 'google'
+          }
+          localStorage.setItem('user', JSON.stringify(user));
+          $uibModalInstance.close(user);
         }
-        $uibModalInstance.close(user);
       }
     }])
     .directive('googleSignInButton', function() {
       return {
         scope: {
-          gClientId: '@',
-          callback: '&onSignIn'
+          buttonId: '@',
+          options: '&'
         },
-        template: '<a href ng-click="onSignInButtonClick()" class="btn btn-warning btn-block btn-lg">Google</a>',
-        controller: ['$scope', '$attrs', function($scope, $attrs) {
-          gapi.load('auth2', function() { //load in the auth2 api's, without it gapi.auth2 will be undefined
-            gapi.auth2.init({
-              client_id: $attrs.gClientId
-            });
-            var GoogleAuth = gapi.auth2.getAuthInstance(); //get's a GoogleAuth instance with your client-id, needs to be called after gapi.auth2.init
-            $scope.onSignInButtonClick = function() { //add a function to the controller so ng-click can bind to it
-              GoogleAuth.signIn().then(function(response) { //request to sign in
-                $scope.callback({ response: response });
-              });
-            };
-          });
-        }]
+        template: '<div>Google</div>',
+        link: function(scope, element, attrs) {
+          var div = element.find('div')[0];
+          div.id = attrs.buttonId;
+          gapi.signin2.render(div.id, scope.options()); //render a google button, first argument is an id, second options
+        }
       };
     });
+
 }());

@@ -32,6 +32,7 @@
 
 <!-- google api -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/plus.js?onload=init"></script>
 
 {{--livereload--}}
 @if ( Config::get('app.debug') )
