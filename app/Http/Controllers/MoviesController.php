@@ -107,7 +107,7 @@ class MoviesController extends Controller
                     }
                 }
             } else { // user rates movie
-                if (!points) {
+                if (!$points) {
                     return self::makeResponse([], 400, 'Data "points" is required.', '');
                 }
                 // insert rating to rating table
