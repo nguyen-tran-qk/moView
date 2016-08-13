@@ -88,7 +88,7 @@
       };
       $scope.signUp = function() {
         UserService.signUp($scope.user, function(res) {
-          if (res) {
+          if (res && res.meta.code <= 200) {
             $scope.login();
           }
         })
