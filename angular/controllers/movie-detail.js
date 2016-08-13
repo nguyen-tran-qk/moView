@@ -12,12 +12,16 @@
       };
 
       $scope.addRating = function() {
-        $scope.points = $scope.percent / 10
-        MovieService.addRating($scope.user.id, $scope.movieDetail.id, $scope.points, true, function(res) {
-          if (res) {
-            $scope.refreshMovie();
-          }
-        })
+        if ($scope.user) {
+          $scope.points = $scope.percent / 10
+          MovieService.addRating($scope.user.id, $scope.movieDetail.id, $scope.points, true, function(res) {
+            if (res) {
+              $scope.refreshMovie();
+            }
+          })
+        } else {
+          $scope.openLogin();
+        }
       }
 
       $scope.trustSrc = function(src) {

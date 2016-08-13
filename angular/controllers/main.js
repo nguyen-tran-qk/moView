@@ -6,13 +6,13 @@
         gapi.auth2.init({
           client_id: '16234131622-pmjdusc75n1s8b885banj766qarbu4v4.apps.googleusercontent.com'
         });
-      }); 
+      });
 
       $scope.user = UserService.isLoggedIn();
       $scope.$state = $state;
       $scope.isActive = false;
       $rootScope.$pageFinishedLoading = false;
-      
+
       $scope.activeButton = function() {
         $scope.isActive = !$scope.isActive;
       };
@@ -82,6 +82,13 @@
       $scope.user = {
         'username': '',
         'password': null
+      };
+      $scope.signUp = function() {
+        UserService.signUp($scope.user, function(res) {
+          if (res) {
+            $scope.login();
+          }
+        })
       };
       $scope.login = function() {
         UserService.login($scope.user, function(res) {
