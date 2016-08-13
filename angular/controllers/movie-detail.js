@@ -12,7 +12,7 @@
       };
 
       $scope.addRating = function() {
-        if ($scope.user) {
+        if ($scope.user && $scope.user.id) {
           $scope.points = $scope.percent / 10
           MovieService.addRating($scope.movieDetail.id, $scope.points, true, function(res) {
             if (res) {

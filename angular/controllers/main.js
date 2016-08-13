@@ -91,7 +91,7 @@
     }])
     .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', 'signUp', function($scope, $http, $uibModal, $uibModalInstance, UserService, signUp) {
       if (signUp) {
-        $scope.signUp = signUp;
+        $scope.up = signUp;
       }
       $scope.user = {
         'username': '',
