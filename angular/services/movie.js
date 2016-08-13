@@ -22,8 +22,8 @@
               }
             });
         },
-        getMovieInfo: function(id, user_id, callback, errorCallback) {
-          $http.get('/movies/' + id, {user_id: user_id})
+        getMovieInfo: function(id, callback, errorCallback) {
+          $http.get('/movies/' + id)
             .success(function(res) {
               if (callback) {
                 callback(res);
@@ -35,8 +35,8 @@
               }
             });
         },
-        manageMovie: function(userId, id, movie, isUpdate, callback, errorCallback) {
-          $http.post('/movies/' + id, { user_id: userId, update: isUpdate, data: movie })
+        manageMovie: function(id, movie, isUpdate, callback, errorCallback) {
+          $http.post('/movies/' + id, {update: isUpdate, data: movie })
             .success(function(res) {
               if (callback) {
                 callback(res);
@@ -48,8 +48,8 @@
               }
             });
         },
-        addRating: function(userId, id, points, isUpdate, callback, errorCallback) {
-          $http.post('/movies/' + id, { user_id: userId, update: isUpdate, points: points })
+        addRating: function(id, points, isUpdate, callback, errorCallback) {
+          $http.post('/movies/' + id, {update: isUpdate, points: points })
             .success(function(res) {
               if (callback) {
                 callback(res);

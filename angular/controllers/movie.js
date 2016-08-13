@@ -42,7 +42,7 @@
       };
       $scope.addMovie = function() {
         if ($scope.isUpdate) {
-          MovieService.manageMovie($scope.user.id, $scope.movie.id, $scope.movie, true, function(res) {
+          MovieService.manageMovie($scope.movie.id, $scope.movie, true, function(res) {
             if (res.body.id) {
               $uibModalInstance.close(res);
             }

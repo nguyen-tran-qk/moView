@@ -67,12 +67,12 @@
         $scope.addSlide();
       }
       //function to open Login modal, refer to ui-bootstrap docs for Modals
-      $scope.openLogin = function() {
+      $scope.openLogin = function(signUp) {
         var modalInstance = $uibModal.open({
           templateUrl: 'views/login.html',
           controller: 'LoginController',
           resolve: {
-            // user: function
+            signUp: signUp
           }
         });
         modalInstance.result.then(function(user) {
@@ -80,12 +80,19 @@
         });
       };
       $scope.logOut = function() {
-        UserService.logOut();
+        UserService.logOut(function(res) {
+          if (res && res.meta.code <= 300) {
+            $scope.user = null;
+          }
+        });
         $scope.user = UserService.isLoggedIn();
       }
       $scope.initApp(); // un-comment after demo
     }])
-    .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', function($scope, $http, $uibModal, $uibModalInstance, UserService) {
+    .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', 'signUp', function($scope, $http, $uibModal, $uibModalInstance, UserService, signUp) {
+      if (signUp) {
+        $scope.signUp = signUp;
+      }
       $scope.user = {
         'username': '',
         'password': null

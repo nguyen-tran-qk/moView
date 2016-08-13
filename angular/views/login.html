@@ -13,6 +13,7 @@
   </div>
 </div>
 <div class="modal-footer">
-  <div class="col-xs-6 col-md-6"><a href ng-click="signUp()" class="btn btn-primary btn-block btn-lg">Sign Up</a></div>
-  <div class="col-xs-6 col-md-6"><a href ng-click="login()" class="btn btn-success btn-block btn-lg">Login</a></div>
+  <div class="col-xs-6 col-md-6"><a href ng-click="cancel()" class="btn btn-primary btn-block btn-lg">Cancel</a></div>
+  <div ng-if="signUp" class="col-xs-6 col-md-6"><a href ng-click="signUp(signUp)" class="btn btn-success btn-block btn-lg">Sign Up</a></div>
+  <div ng-if="!signUp'" class="col-xs-6 col-md-6"><a href ng-click="login()" class="btn btn-success btn-block btn-lg">Login</a></div>
 </div>

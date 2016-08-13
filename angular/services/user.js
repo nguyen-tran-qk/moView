@@ -41,7 +41,7 @@
           $http.post('/login', { username: user.username, password: user.password })
             .success(function(res) {
               // if (res.body.user) {
-                // localStorage.setItem('user', JSON.stringify(res.body.user));
+              // localStorage.setItem('user', JSON.stringify(res.body.user));
               // }
               if (callback) {
                 callback(res);
@@ -68,18 +68,18 @@
         },
         logOut: function(callback, errorCallback) {
           // localStorage.removeItem('user');
-          // $http.get('/users/sign-out')
-          //   .success(function(res) {
-          //     user = null;
-          //     if (callback) {
-          //       callback(res);
-          //     }
-          //   })
-          //   .error(function() {
-          //     if (errorCallback) {
-          //       errorCallback();
-          //     }
-          //   });
+          $http.get('/logout')
+            .success(function(res) {
+              user = null;
+              if (callback) {
+                callback(res);
+              }
+            })
+            .error(function() {
+              if (errorCallback) {
+                errorCallback();
+              }
+            });
         },
         getUserList: function(callback, errorCallback) {
           $http.get('/users')

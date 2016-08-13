@@ -14,7 +14,7 @@
       $scope.addRating = function() {
         if ($scope.user) {
           $scope.points = $scope.percent / 10
-          MovieService.addRating($scope.user.id, $scope.movieDetail.id, $scope.points, true, function(res) {
+          MovieService.addRating($scope.movieDetail.id, $scope.points, true, function(res) {
             if (res) {
               $scope.refreshMovie();
             }
@@ -27,7 +27,7 @@
       $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src);
       };
-      MovieService.getMovieInfo(parseInt($stateParams.id), $scope.user.id, function(res) {
+      MovieService.getMovieInfo(parseInt($stateParams.id), function(res) {
         if (res && res.meta.code <= 200) {
           $scope.movieDetail = res.body;
           $scope.movieDetail.points = ($scope.movieDetail.rating * 50) / 100;
