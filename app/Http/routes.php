@@ -15,10 +15,11 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/users/{id?}', 'UserController@getUserById');
+Route::get('/users/{id?}', 'UserController@getUserById'); // get current user or get user by id
 Route::post('/users', 'UserController@addNewUser');
 Route::post('/users/{id}', 'UserController@updateUser');
 Route::post('/login', 'UserController@login');
+Route::get('/logout', 'UserController@logout');
 
 Route::get('/movies/{id?}', 'MoviesController@getMovieById');
 Route::post('/movies', 'MoviesController@addNewMovie'); // send with data object { data: <movie_obj> }

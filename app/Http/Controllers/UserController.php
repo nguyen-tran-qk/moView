@@ -16,9 +16,14 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function getUserById($id = null) {
+    public function getUserById(Request $request, $id = null) {
         if ($id == null) {
-            return self::makeResponse(User::orderBy('id', 'asc')->get(), 200, '', '');
+            if ($request->session()->has('user_id')) {
+                $user = DB::table('users')->where('id', $request->session()->get('user_id'))->first();
+            } else {
+                $user = [];
+            }
+            return self::makeResponse($user, 200, '', '');
         } else {
             return self::makeResponse($this->show($id), 200, '', '');
         }
@@ -36,6 +41,7 @@ class UserController extends Controller
         $user->username = $request->input('username');
         $user->password = $request->input('password');
         $user->role = 1;
+        $user->timestamps = false;
         $user->save();
 
         // return 'User record successfully created with id ' . $user->id;
