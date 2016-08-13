@@ -50,7 +50,7 @@ class MoviesController extends Controller
         $movie = new Movie;
         $data = $request->input('data', false);
         if (!$data) {
-            self::makeResponse([], 400, 'Missing data.', '');
+            return self::makeResponse([], 400, 'Missing data.', '');
         }
         $movie->timestamps = false;
         foreach ($data as $key => $value) {
@@ -99,7 +99,7 @@ class MoviesController extends Controller
         if ($is_update) {
             if ($user->role == 32) {
                 if (!$data) {
-                    self::makeResponse([], 400, 'Missing data.', '');
+                    return self::makeResponse([], 400, 'Missing data.', '');
                 }
                 foreach ($data as $key => $value) {
                     if ($movie->$key !== $value) {
