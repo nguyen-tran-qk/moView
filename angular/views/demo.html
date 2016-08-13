@@ -2,7 +2,7 @@
   <h1>DEMO SITE</h1>
   <a ng-if="!user" href ng-click="openDemoLogin()" class="btn btn-primary btn-lg">Login</a>
   <a ng-if="user" href ng-click="logout()" class="btn btn-warning btn-lg">Logout</a>
-  <h1 ng-if="user">{{user.name}} <span ng-if="user.login">Logged in with google</span><span ng-if="!user.login">logged in with facebook</span></h1>
+  <h1 ng-if="user">{{user.name}} <span ng-if="user.login">logged in with google</span><span ng-if="!user.login">logged in with facebook</span></h1>
   <form class="well form-horizontal">
     <fieldset>
       <!-- Form Name -->
