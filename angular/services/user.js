@@ -17,7 +17,7 @@
         },
         getFacebookInfo: function(token) {
           var deferred = $q.defer();
-          FB.api('/me', {fields: 'id, name, last_name, email' , access_token: token}, function(res) {
+          FB.api('/me', { fields: 'id, name, last_name, email', access_token: token }, function(res) {
             if (!res || res.error) {
               deferred.reject('Error occured');
             } else {
@@ -32,6 +32,19 @@
               if (res.body.user) {
                 localStorage.setItem('user', JSON.stringify(res.body.user));
               }
+              if (callback) {
+                callback(res);
+              }
+            })
+            .error(function() {
+              if (errorCallback) {
+                errorCallback();
+              }
+            });
+        },
+        signUp: function(user, callback, errorCallback) {
+          $http.post('/users', { username: user.username, password: user.password })
+            .success(function(res) {
               if (callback) {
                 callback(res);
               }
