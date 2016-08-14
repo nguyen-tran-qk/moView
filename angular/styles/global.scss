@@ -65,3 +65,28 @@
     }
   }
 }
+
+.comment {
+  .comment__like {
+    position: absolute;
+    top: 43px;
+    right: 30px;
+    font-size: 14px;
+    color: #fe505a;
+    font-family: 'Glyphicons Halflings';
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    &:before {
+      content: "\e125";
+      font-size: 14px;
+      color: #fe505a;
+      margin-right: 10px;
+    }
+  }
+  .comment__options {
+    position: absolute;
+    top: 43px;
+    right: 0;
+    color: #fe505a;
+  }
+}

@@ -1,5 +1,5 @@
 <!-- Main content -->
-<section class="container movie-container">
+<section class="container movie-container" ng-cloak>
   <div class="col-sm-8 col-md-9">
     <div class="movie">
       <h2 class="page-heading">{{movieDetail.name}}</h2>
@@ -25,7 +25,7 @@
           <p class="movie__option"><strong>Actors: </strong>{{movieDetail.cast}}</p>
           <!-- <p class="movie__option"><strong>Age restriction: </strong><a href="#">13</a></p> -->
           <!-- <p class="movie__option"><strong>Box office: </strong><a href="#">$1 017 003 568</a></p> -->
-          <a href="#" class="comment-link">Comments:  15</a>
+          <a href="#" class="comment-link">Comments: {{ movieDetail.reviews.length }}</a>
           <!--  <div class="movie__btns">
             <a href="#" class="btn btn-md btn--warning">book a ticket for this movie</a>
             <a href="#" class="watchlist">Add to watchlist</a>
@@ -49,70 +49,31 @@
       </div>
     </div>
     <div class="choose-container">
-      <!-- hiden maps with multiple locator-->
-      <h2 class="page-heading">comments (15)</h2>
+      <h2 class="page-heading">comments ({{ movieDetail.reviews.length }})</h2>
       <div class="comment-wrapper">
         <form id="comment-form" class="comment-form" method='post'>
-          <textarea class="comment-form__text" placeholder='Add you comment here'></textarea>
-          <label class="comment-form__info">250 characters left</label>
-          <button ng-click="addComment()" class="btn btn-md btn--danger comment-form__btn">add comment</button>
+          <textarea class="comment-form__text" placeholder='What do you think about this movie?*' ng-model="myReview"></textarea>
+          <label class="comment-form__info">* At least 50 characters</label>
+          <button ng-click="addComment()" class="btn btn-md btn--danger comment-form__btn">{{ waiting ? 'Working ...' : 'add comment' }}</button>
         </form>
         <div class="comment-sets">
-          <div class="comment">
+          <div class="comment" ng-repeat="review in movieDetail.reviews">
             <div class="comment__images">
               <img alt='' src="http://placehold.it/50x50">
             </div>
-            <a href='#' class="comment__author"><span class="social-used fa fa-facebook"></span>Roberta Inetti</a>
+            <a href='#' class=""><strong>{{ review.user_name }}</strong></a>
             <p class="comment__date">today | 03:04</p>
-            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
-            <a href='#' class="comment__reply">Reply</a>
-          </div>
-          <div class="comment">
-            <div class="comment__images">
-              <img alt='' src="http://placehold.it/50x50">
-            </div>
-            <a href='#' class="comment__author"><span class="social-used fa fa-vk"></span>Olia Gozha</a>
-            <p class="comment__date">22.10.2013 | 14:40</p>
-            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
-            <a href='#' class="comment__reply">Reply</a>
-          </div>
-          <div class="comment comment--answer">
-            <div class="comment__images">
-              <img alt='' src="http://placehold.it/50x50">
-            </div>
-            <a href='#' class="comment__author"><span class="social-used fa fa-vk"></span>Dmitriy Pustovalov</a>
-            <p class="comment__date">today | 10:19</p>
-            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
-            <a href='#' class="comment__reply">Reply</a>
-          </div>
-          <div class="comment comment--last">
-            <div class="comment__images">
-              <img alt='' src="http://placehold.it/50x50">
-            </div>
-            <a href='#' class="comment__author"><span class="social-used fa fa-facebook"></span>Sia Andrews</a>
-            <p class="comment__date"> 22.10.2013 | 12:31 </p>
-            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
-            <a href='#' class="comment__reply">Reply</a>
-          </div>
-          <div id='hide-comments' class="hide-comments">
-            <div class="comment">
-              <div class="comment__images">
-                <img alt='' src="http://placehold.it/50x50">
-              </div>
-              <a href='#' class="comment__author"><span class="social-used fa fa-facebook"></span>Roberta Inetti</a>
-              <p class="comment__date">today | 03:04</p>
-              <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
-              <a href='#' class="comment__reply">Reply</a>
-            </div>
-            <div class="comment">
-              <div class="comment__images">
-                <img alt='' src="http://placehold.it/50x50">
-              </div>
-              <a href='#' class="comment__author"><span class="social-used fa fa-vk"></span>Olia Gozha</a>
-              <p class="comment__date">22.10.2013 | 14:40</p>
-              <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
-              <a href='#' class="comment__reply">Reply</a>
-            </div>
+            <p class="comment__message">{{ review.content }}</p>
+            <a href='#' class="comment__like">Like</a>
+            <span uib-dropdown on-toggle="toggled(open)" class="comment__options">
+              <a href class="glyphicon glyphicon-chevron-down" id="simple-dropdown" uib-dropdown-toggle></a>
+              <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                <li>
+                  <a href>Edit</a>
+                  <a href ng-click="delete(review)">Delete</a>
+                </li>
+              </ul>
+            </span>
           </div>
           <div class="comment-more">
             <a href="#" class="watchlist">Show more comments</a>
