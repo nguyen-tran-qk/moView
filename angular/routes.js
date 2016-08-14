@@ -9,7 +9,19 @@
           views: {
             'main': {
               templateUrl: 'views/main.html',
-              controller: 'MainController'
+              controller: 'MainController',
+              resolve: {
+                login: ['$q', '$timeout', 'UserService', '$state', function($q, $timeout, UserService, $state) {
+                  var deferred = $q.defer();
+                  if (UserService.isLoggedIn()) {
+                    deferred.resolve(UserService.isLoggedIn());
+                  } else {
+                    $timeout(deferred.reject);
+                    $state.go('index');
+                  }
+                  return deferred.promise;
+                }]
+              }
             }
           }
         })

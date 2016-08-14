@@ -28,7 +28,7 @@ Route::post('/movies/{id}', 'MoviesController@updateMovie');
 			// there are also { data: <movie_obj>, points: <points> }, 
 			// in which 'data' is requied only if Admin updates the movie; points is the rating of user for the movie.
 
-Route::get('/movies/{movie_id}/reviews', 'ReviewsController@getReviewsByMovie');
+Route::get('/movies/{movie_id}/reviews', 'MoviesController@getReviews');
 Route::post('/movies/{movie_id}/reviews', 'ReviewsController@addReview'); // send with data object { data: <content of review> }
 
 Route::post('/reviews/{id}', 'ReviewsController@updateReview');
