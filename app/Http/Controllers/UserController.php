@@ -56,9 +56,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    // public function show($id) {
-    //     return User::find($id);
-    // }
+    public function show($id) {
+        return User::find($id);
+    }
 
     /**
      * Update the specified resource in storage.

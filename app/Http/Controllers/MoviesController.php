@@ -127,9 +127,11 @@ class MoviesController extends Controller
                 return self::makeResponse([], 403, 'Access denied.', '');
             }
         }
+    }
 
-
-        // return "Sucess updating user #" . $movie->id;
+    public function getReviews(Request $request, $movie_id) {
+        $reviews = (new ReviewsController)->getReviewsByMovie($movie_id);
+        return self::makeResponse(array('reviews' => $reviews), 200, '', '');
     }
 
     /**
@@ -156,11 +158,3 @@ class MoviesController extends Controller
         return $average;
     }
 }
-            // $movie->description = $request->input('description');
-            // $movie->duration = $request->input('duration');
-            // $movie->cast = $request->input('cast');
-            // $movie->director = $request->input('director');
-            // $movie->date_released = $request->input('date_released');
-            // $movie->rating = $request->input('rating');
-            // $movie->trailer = $request->input('trailer');
-            // $movie->poster = $request->input('poster');
