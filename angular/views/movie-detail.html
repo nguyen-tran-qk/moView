@@ -53,30 +53,35 @@
       <div class="comment-wrapper">
         <form id="comment-form" class="comment-form" method='post'>
           <textarea class="comment-form__text" placeholder='What do you think about this movie?*' ng-model="myReview"></textarea>
-          <label class="comment-form__info">* At least 50 characters</label>
+          <label class="comment-form__info">* At least 10 characters</label>
           <button ng-click="addComment()" class="btn btn-md btn--danger comment-form__btn">{{ waiting ? 'Working ...' : 'add comment' }}</button>
         </form>
         <div class="comment-sets">
-          <div class="comment" ng-repeat="review in movieDetail.reviews">
+          <div class="comment" ng-repeat="review in movieDetail.reviews | limitTo:limitNum">
             <div class="comment__images">
               <img alt='' src="http://placehold.it/50x50">
             </div>
             <a href='#' class=""><strong>{{ review.user_name }}</strong></a>
             <p class="comment__date">today | 03:04</p>
-            <p class="comment__message">{{ review.content }}</p>
+            <p ng-if="!edit.id" class="comment__message">{{ review.content }}</p>
+            <form id="comment-form" class="comment-form" ng-if="edit.id === review.id">
+              <textarea class="comment-form__text" ng-model="review.content"></textarea>
+              <button ng-click="editComment(review.id, review.content)" class="btn btn-md btn--danger comment-form__btn">SAVE</button>
+              <button ng-click="cancelEdit()" class="btn btn-md btn--primary comment-form__btn">CANCEL</button>
+            </form>
             <a href='#' class="comment__like">Like</a>
-            <span uib-dropdown on-toggle="toggled(open)" class="comment__options">
+            <span ng-if="review.user_id === user.id || user.role === 32" uib-dropdown on-toggle="toggled(open)" class="comment__options">
               <a href class="glyphicon glyphicon-chevron-down" id="simple-dropdown" uib-dropdown-toggle></a>
               <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
                 <li>
-                  <a href>Edit</a>
-                  <a href ng-click="delete(review)">Delete</a>
+                  <a ng-if="review.user_id === user.id" ng-click="toggleEdit(review.id)" href>Edit</a>
+                  <a ng-if="review.user_id === user.id || user.role === 32" href ng-click="delete(review)">Delete</a>
                 </li>
               </ul>
             </span>
           </div>
           <div class="comment-more">
-            <a href="#" class="watchlist">Show more comments</a>
+            <a href ng-if="movieDetail.reviews.length > 10" ng-click="loadMore()" class="watchlist">{{ allChallengesLoaded ? 'Show less comments' : 'Show more comments' }}</a>
           </div>
         </div>
       </div>

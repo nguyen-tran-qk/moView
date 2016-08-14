@@ -6,6 +6,26 @@
       $scope.max = 5;
       $scope.isReadonly = false;
       $scope.myReview = '';
+      $scope.edit = {};
+      $scope.limitNum = 10;
+      $scope.allChallengesLoaded = false;
+
+      $scope.loadMore = function() {
+        if ($scope.limitNum < $scope.movieDetail.reviews.length) {
+          $scope.limitNum += 10;
+          if ($scope.limitNum >= $scope.movieDetail.reviews.length) {
+            $scope.allChallengesLoaded = true;
+          }
+        } else {
+          $scope.limitNum = 10;
+          $scope.allChallengesLoaded = false;
+        }
+      };
+
+      $scope.toggleEdit = function(id) {
+        $scope.edit = {};
+        $scope.edit.id = id;
+      };
 
       $scope.hoveringOver = function(value) {
         $scope.overStar = value;
@@ -41,10 +61,27 @@
           }, 1000);
         }
       });
+      $scope.editComment = function(reviewId, content) {
+        if ($scope.user && $scope.user.role === 1) {
+          $scope.myReview = content;
+          MovieService.updateReview(reviewId, $scope.movieDetail.id, $scope.myReview, true, function(res) {
+            if (res && res.length) {
+              $scope.edit = {};
+              $scope.movieDetail.reviews = res;
+              $scope.myReview = '';
+            }
+          });
+        } else {
+          $scope.openLogin();
+        }
+      }
+      $scope.cancelEdit = function() {
+        $scope.edit = {};
+      }
       $scope.addComment = function() {
         if ($scope.user && $scope.user.role === 1) {
           $scope.waiting = true;
-          MovieService.addReview($scope.movieDetail.id, $scope.myReview, function (res) {
+          MovieService.addReview($scope.movieDetail.id, $scope.myReview, function(res) {
             if (res && res.length) {
               $scope.movieDetail.reviews = res;
               $scope.myReview = '';
