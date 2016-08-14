@@ -28,7 +28,7 @@ class ReviewsController extends Controller
     	$data = $request->input('data', false);
         $user_id = $request->session()->get('user_id', false);
     	$review = new Review;
-    	if (!data) {
+    	if (!$data) {
     		return self::makeResponse([], 400, 'Missing data.', '');
     	}
         if (!$user_id) {
