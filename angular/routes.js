@@ -13,12 +13,14 @@
               resolve: {
                 login: ['$q', '$timeout', 'UserService', '$state', function($q, $timeout, UserService, $state) {
                   var deferred = $q.defer();
-                  if (UserService.isLoggedIn()) {
-                    deferred.resolve(UserService.isLoggedIn());
-                  } else {
-                    $timeout(deferred.reject);
-                    $state.go('index');
-                  }
+                  UserService.isLoggedIn(function(res) {
+                    if (res && res.body.id) {
+                      deferred.resolve(res.body);
+                    } else {
+                      $timeout(deferred.reject);
+                      $state.go('index');
+                    }
+                  });
                   return deferred.promise;
                 }]
               }
