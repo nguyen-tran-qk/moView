@@ -91,8 +91,8 @@
               if (res && res.body.id) {
                 var reviews;
                 getReviews(movie_id, function(res) {
-                  if (res && res.length) {
-                    reviews = res;
+                  if (res && res.body.reviews) {
+                    reviews = res.body.reviews;
                   } else {
                     reviews = false;
                   }
@@ -114,8 +114,8 @@
               if (res && res.body.id) {
                 var reviews;
                 getReviews(movie_id, function(res) {
-                  if (res && res.length) {
-                    reviews = res;
+                  if (res && res.body.reviews) {
+                    reviews = res.body.reviews;
                   } else {
                     reviews = false;
                   }

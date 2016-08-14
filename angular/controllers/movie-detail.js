@@ -44,7 +44,7 @@
       $scope.addComment = function() {
         if ($scope.user && $scope.user.role === 1) {
           $scope.waiting = true;
-          MovieService.addReview($scope.movieDetail.id, $scope.myReview, function (res) {
+          MovieService.addReview($scope.movieDetail.id, $scope.myReview, function(res) {
             if (res && res.length) {
               $scope.movieDetail.reviews = res;
               $scope.myReview = '';
@@ -58,8 +58,12 @@
       $scope.delete = function(review) {
         if ($scope.user && $scope.user.role === 1) {
           MovieService.updateReview(review.id, review.movie_id, null, null, function(res) {
-            if (res && res.length) {
-              $scope.movieDetail.reviews = res;
+            if (res) {
+              if (res.length) {
+                $scope.movieDetail.reviews = res;
+              } else {
+                $scope.movieDetail.reviews = [];
+              }
             }
           });
         }
