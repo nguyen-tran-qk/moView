@@ -1,8 +1,9 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers')
-    .controller('DemoController', ['$scope', '$uibModal', '$state', 'UserService', function($scope, $uibModal, $state, UserService) {
+    .controller('DemoController', ['$scope', '$rootScope', '$uibModal', '$state', 'UserService', function($scope, $rootScope, $uibModal, $state, UserService) {
       $scope.user = (localStorage.user) ? JSON.parse(localStorage.user) : false;
+      $rootScope.$pageFinishedLoading = true;
       $scope.openDemoLogin = function() {
         var modalInstance = $uibModal.open({
           templateUrl: 'views/demo-login.html',
