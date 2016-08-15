@@ -63,7 +63,7 @@
             </div>
             <a href='#' class=""><strong>{{ review.user_name }}</strong></a>
             <p class="comment__date">today | 03:04</p>
-            <p ng-if="!edit.id" class="comment__message">{{ review.content }}</p>
+            <p ng-if="edit.id !== review.id || !edit.id" class="comment__message">{{ review.content }}</p>
             <form id="comment-form" class="comment-form" ng-if="edit.id === review.id">
               <textarea class="comment-form__text" ng-model="review.content"></textarea>
               <button ng-click="editComment(review.id, review.content)" class="btn btn-md btn--danger comment-form__btn">SAVE</button>

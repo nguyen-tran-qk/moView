@@ -15,15 +15,18 @@
                   var deferred = $q.defer();
                   UserService.isLoggedIn(function(res) {
                     if (res && res.body.id) {
-                      deferred.resolve(res.body);
+                      // return res.body;
+                      $timeout(function() {
+                        deferred.resolve(res.body);
+                      }, 1000);
                     } else {
-                      deferred.resolve(false);
-                      // $timeout(deferred.reject);
+                      // return false;
+                      $timeout(deferred.resolve(false));
                       // $state.go('index');
                     }
                     return deferred.promise;
                   });
-                  
+
                 }]
               }
             }
@@ -34,7 +37,7 @@
           views: {
             'content': {
               templateUrl: 'views/home.html',
-              controller: 'MainController'
+              controller: 'HomeController'
             }
           }
         })
