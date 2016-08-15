@@ -17,11 +17,13 @@
                     if (res && res.body.id) {
                       deferred.resolve(res.body);
                     } else {
-                      $timeout(deferred.reject);
-                      $state.go('index');
+                      deferred.resolve(false);
+                      // $timeout(deferred.reject);
+                      // $state.go('index');
                     }
+                    return deferred.promise;
                   });
-                  return deferred.promise;
+                  
                 }]
               }
             }

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('MoviewControllers')
-    .controller('MainController', ['$scope', '$rootScope', '$state', '$http', '$timeout', '$uibModal', '$anchorScroll', '$location', 'login', 'UserService', 'MovieService', function($scope, $rootScope, $state, $http, $timeout, $uibModal, $anchorScroll, $location, login, UserService, MovieService) {
+    .controller('MainController', ['$q','$scope', '$rootScope', '$state', '$http', '$timeout', '$uibModal', '$anchorScroll', '$location', 'login', 'UserService', 'MovieService', function($q, $scope, $rootScope, $state, $http, $timeout, $uibModal, $anchorScroll, $location, login, UserService, MovieService) {
       $rootScope.$pageFinishedLoading = false;
       gapi.load('auth2', function() { //load in the auth2 api's, without it gapi.auth2 will be undefined
         gapi.auth2.init({
@@ -10,7 +10,9 @@
       });
 
       $scope.initApp = function() {
-        $scope.user = login;
+        login.then(function(result){
+          $scope.user = result;  
+        });
         $scope.refreshMovie();
       };
 
