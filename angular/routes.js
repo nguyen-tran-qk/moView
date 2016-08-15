@@ -18,14 +18,14 @@
                       // return res.body;
                       $timeout(function() {
                         deferred.resolve(res.body);
-                      }, 1000);
+                      });
                     } else {
                       // return false;
                       $timeout(deferred.resolve(false));
                       // $state.go('index');
                     }
-                    return deferred.promise;
                   });
+                    return deferred.promise;
 
                 }]
               }
@@ -38,6 +38,15 @@
             'content': {
               templateUrl: 'views/home.html',
               controller: 'HomeController'
+            }
+          }
+        })
+        .state('index.home.manage', {
+          url: '/manage',
+          views: {
+            'content': {
+              templateUrl: 'views/manage-movie.html',
+              controller: 'MovieController'
             }
           }
         })
@@ -56,15 +65,6 @@
             'content': {
               templateUrl: 'views/demo.html',
               controller: 'DemoController'
-            }
-          }
-        })
-        .state('index.manage', {
-          url: 'manage',
-          views: {
-            'content': {
-              templateUrl: 'views/manage-movie.html',
-              controller: 'MovieController'
             }
           }
         })

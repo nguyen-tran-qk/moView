@@ -1,3 +1,4 @@
+<div ng-if="$state.current.name === 'index.home'">
 <!-- Slider -->
 <div class="bannercontainer">
   <div style="min-height:50%">
@@ -76,3 +77,6 @@
   </div>
 </section>
 <div class="clearfix"></div>
+</div>
+<div ng-if="$state.current.name === 'index.home.manage'" ui-view="content">
+</div>
