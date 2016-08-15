@@ -54,11 +54,11 @@ class ReviewsController extends Controller
         if (!$review) {
             return self::makeResponse([], 404, 'Not Found', '');
         }
-
-        if (!$user || $user->id != $review->user_id) {
-            return self::makeResponse([], 401, 'Unauthorized user.', '');
+        if ($user->role != 32) {
+                if (!$user || $user->id != $review->user_id) {
+                return self::makeResponse([], 401, 'Unauthorized user.', '');
+            }
         }
-
         if ($is_update) {
             if (!$data) {
                 return self::makeResponse([], 400, 'Missing data.', '');

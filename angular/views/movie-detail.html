@@ -69,7 +69,7 @@
               <button ng-click="editComment(review.id, review.content)" class="btn btn-md btn--danger comment-form__btn">SAVE</button>
               <button ng-click="cancelEdit()" class="btn btn-md btn--primary comment-form__btn">CANCEL</button>
             </form>
-            <a href='#' class="comment__like">Like</a>
+            <!-- <a href='#' class="comment__like">Like</a> -->
             <span ng-if="review.user_id === user.id || user.role === 32" uib-dropdown on-toggle="toggled(open)" class="comment__options">
               <a href class="glyphicon glyphicon-chevron-down" id="simple-dropdown" uib-dropdown-toggle></a>
               <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">

@@ -93,7 +93,7 @@
         }
       };
       $scope.delete = function(review) {
-        if ($scope.user && $scope.user.role === 1) {
+        if ($scope.user) {
           MovieService.updateReview(review.id, review.movie_id, null, null, function(res) {
             if (res) {
               if (res.length) {
