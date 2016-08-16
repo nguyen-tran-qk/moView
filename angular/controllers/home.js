@@ -3,31 +3,12 @@
   angular.module('MoviewControllers')
     .controller('HomeController', ['$scope', '$rootScope', '$state', '$http', '$timeout', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', function($scope, $rootScope, $state, $http, $timeout, $uibModal, $anchorScroll, $location, UserService, MovieService) {
       $rootScope.$pageFinishedLoading = false;
-      // gapi.load('auth2', function() { //load in the auth2 api's, without it gapi.auth2 will be undefined
-      //   gapi.auth2.init({
-      //     client_id: '16234131622-pmjdusc75n1s8b885banj766qarbu4v4.apps.googleusercontent.com'
-      //   });
-      // });
-
-      // $scope.initApp = function() {
-      //   $scope.user = login;
-      //   $scope.refreshMovie();
-      // };
-      // fake slide
+      // create slide
       $scope.myInterval = 3000;
       $scope.noWrapSlides = false;
       $scope.active = 0;
       $scope.slides = [];
       var currIndex = 0;
-      // $scope.addSlide = function() {
-      //   var newWidth = window.screen.width >= 1920 ? 1915 + $scope.slides.length + 1 : window.screen.width + $scope.slides.length + 1;
-      //   angular.forEach($scope.movies, function(movie) {
-      //       $scope.slides.push({
-      //         image: movie.banner + newWidth + '/400',
-      //         id: currIndex++
-      //       });
-      //     })
-      // };
 
       $scope.$state = $state;
       $scope.isActive = false;
@@ -54,9 +35,6 @@
       $scope.activeButton = function() {
         $scope.isActive = !$scope.isActive;
       };
-      // $timeout(function() { // remove after demo
-      //   $rootScope.$pageFinishedLoading = true;
-      // }, 1000);
 
       function chunk(arr, size) {
         var newArr = [];
@@ -69,9 +47,6 @@
       $scope.viewMovieDetail = function(id) {
         $state.go('index.movie', { 'id': id });
       };
-
-
-      $scope.initApp(); // un-comment after demo
     }])
     .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', 'signUp', function($scope, $http, $uibModal, $uibModalInstance, UserService, signUp) {
       if (signUp) {
