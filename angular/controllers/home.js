@@ -71,7 +71,7 @@
       };
 
 
-      // $scope.initApp(); // un-comment after demo
+      $scope.initApp(); // un-comment after demo
     }])
     .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', 'signUp', function($scope, $http, $uibModal, $uibModalInstance, UserService, signUp) {
       if (signUp) {
