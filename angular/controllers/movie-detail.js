@@ -81,6 +81,12 @@
       $scope.addComment = function() {
         if ($scope.user && $scope.user.role === 1) {
           $scope.waiting = true;
+          var tempCom = {
+            movie_id: $scope.movieDetail.id,
+            content: $scope.myReview,
+            user_id: $scope.user.id
+          }
+          $scope.movieDetail.reviews.push(tempCom);
           MovieService.addReview($scope.movieDetail.id, $scope.myReview, function(res) {
             if (res && res.length) {
               $scope.movieDetail.reviews = res;
