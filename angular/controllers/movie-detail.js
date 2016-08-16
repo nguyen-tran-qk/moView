@@ -63,12 +63,16 @@
       });
       $scope.editComment = function(reviewId, content) {
         if ($scope.user && $scope.user.role === 1) {
+          $scope.waiting = true;
+          $scope.tempCom = { id: reviewId };
           $scope.myReview = content;
           MovieService.updateReview(reviewId, $scope.movieDetail.id, $scope.myReview, true, function(res) {
             if (res && res.length) {
               $scope.edit = {};
               $scope.movieDetail.reviews = res;
               $scope.myReview = '';
+              $scope.waiting = true;
+              $scope.tempCom = {};
             }
           });
         } else {
@@ -78,19 +82,25 @@
       $scope.cancelEdit = function() {
         $scope.edit = {};
       }
+      $scope.tempCom = {};
       $scope.addComment = function() {
+        $scope.tempCom = {};
         if ($scope.user && $scope.user.role === 1) {
           $scope.waiting = true;
-          var tempCom = {
+          $scope.tempCom = {
+            id: 'abc',
             movie_id: $scope.movieDetail.id,
             content: $scope.myReview,
-            user_id: $scope.user.id
+            user_name: $scope.user.username,
+            updated_at: new Date()
           }
-          $scope.movieDetail.reviews.push(tempCom);
+          $scope.movieDetail.reviews.unshift($scope.tempCom);
           MovieService.addReview($scope.movieDetail.id, $scope.myReview, function(res) {
             if (res && res.length) {
               $scope.movieDetail.reviews = res;
               $scope.myReview = '';
+            } else {
+              $scope.movieDetail.reviews.shift($scope.tempCom);
             }
             $scope.waiting = false;
           });
@@ -100,16 +110,25 @@
       };
       $scope.delete = function(review) {
         if ($scope.user) {
+          $scope.waiting = true;
+          $scope.tempCom = { id: review.id };
           MovieService.updateReview(review.id, review.movie_id, null, null, function(res) {
             if (res) {
               if (res.length) {
                 $scope.movieDetail.reviews = res;
+                $scope.waiting = true;
+                $scope.tempCom = {};
               } else {
                 $scope.movieDetail.reviews = [];
               }
             }
           });
         }
+      };
+      $scope.srollToCmtSection = function() {
+        $('html,body').animate({
+          scrollTop: $("#comment-section").offset().top
+        }, 'slow');
       };
     }])
 }());

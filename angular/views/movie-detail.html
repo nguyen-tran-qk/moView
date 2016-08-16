@@ -25,7 +25,7 @@
           <p class="movie__option"><strong>Actors: </strong>{{movieDetail.cast}}</p>
           <!-- <p class="movie__option"><strong>Age restriction: </strong><a href="#">13</a></p> -->
           <!-- <p class="movie__option"><strong>Box office: </strong><a href="#">$1 017 003 568</a></p> -->
-          <a href="#" class="comment-link">Comments: {{ movieDetail.reviews.length }}</a>
+          <a href ng-click="srollToCmtSection()" class="comment-link">Comments: {{ movieDetail.reviews.length }}</a>
           <!--  <div class="movie__btns">
             <a href="#" class="btn btn-md btn--warning">book a ticket for this movie</a>
             <a href="#" class="watchlist">Add to watchlist</a>
@@ -48,7 +48,7 @@
         <iframe class="embed-responsive-item" width="560" height="315" ng-src="{{trustSrc(movieDetail.trailer)}}" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
-    <div class="choose-container">
+    <div id="comment-section" class="choose-container">
       <h2 class="page-heading">comments ({{ movieDetail.reviews.length }})</h2>
       <div class="comment-wrapper">
         <form id="comment-form" class="comment-form" method='post'>
@@ -61,16 +61,19 @@
             <div class="comment__images">
               <img alt='' src="http://placehold.it/50x50">
             </div>
-            <a href='#' class=""><strong>{{ review.user_name }}</strong></a>
-            <p class="comment__date">today | 03:04</p>
+            <a href class=""><strong>{{ review.user_name }}</strong></a>
+            <p class="comment__date">{{ review.updated_at | fromNow }}</p>
             <p ng-if="edit.id !== review.id || !edit.id" class="comment__message">{{ review.content }}</p>
             <form id="comment-form" class="comment-form" ng-if="edit.id === review.id">
-              <textarea class="comment-form__text" ng-model="review.content"></textarea>
-              <button ng-click="editComment(review.id, review.content)" class="btn btn-md btn--danger comment-form__btn">SAVE</button>
-              <button ng-click="cancelEdit()" class="btn btn-md btn--primary comment-form__btn">CANCEL</button>
+              <fieldset ng-disabled="review.id === tempCom.id && waiting">
+                <textarea class="comment-form__text" ng-model="review.content"></textarea>
+                <button ng-click="editComment(review.id, review.content)" class="btn btn-md btn--danger comment-form__btn">SAVE</button>
+                <button ng-click="cancelEdit()" class="btn btn-md btn--primary comment-form__btn">CANCEL</button>
+              </fieldset>
             </form>
             <!-- <a href='#' class="comment__like">Like</a> -->
-            <span ng-if="review.user_id === user.id || user.role === 32" uib-dropdown on-toggle="toggled(open)" class="comment__options">
+            <div class="loader comment__options" ng-show="review.id === tempCom.id && waiting"></div>
+            <span ng-if="review.user_id === user.id || user.role === 32" ng-hide="review.id === tempCom.id && waiting" uib-dropdown on-toggle="toggled(open)" class="comment__options">
               <a href class="glyphicon glyphicon-chevron-down" id="simple-dropdown" uib-dropdown-toggle></a>
               <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
                 <li>

@@ -1,10 +1,10 @@
 <div ng-if="$state.current.name === 'index.home'">
 <!-- Slider -->
 <div class="bannercontainer">
-  <div style="min-height:50%">
+  <div style="height:50%">
     <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
       <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-        <img ng-src="{{slide.image}}" style="margin:auto;">
+        <img ng-src="{{slide.image}}" style="margin:auto; height:auto; min-width:100%;">
         <!-- <div class="carousel-caption">
           <h4>Slide {{slide.id}}</h4>
           <p>{{slide.text}}</p>

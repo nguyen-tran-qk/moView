@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var app = angular.module('MoviewApp', ['ngAnimate', 'ui.bootstrap', 'MoviewControllers', 'CarettRoutes', 'MoviewServices']);
+  var app = angular.module('MoviewApp', ['ngAnimate', 'ui.bootstrap', 'MoviewControllers', 'CarettRoutes', 'MoviewServices', 'MoviewDirectives']);
 
   app.run(['$rootScope', '$window', 'UserService',
     function($rootScope, $window, UserService) {
