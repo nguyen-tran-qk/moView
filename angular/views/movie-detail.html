@@ -52,9 +52,11 @@
       <h2 class="page-heading">comments ({{ movieDetail.reviews.length }})</h2>
       <div class="comment-wrapper">
         <form id="comment-form" class="comment-form" method='post'>
-          <textarea class="comment-form__text" placeholder='What do you think about this movie?*' ng-model="myReview"></textarea>
-          <label class="comment-form__info">* At least 10 characters</label>
-          <button ng-click="addComment()" class="btn btn-md btn--danger comment-form__btn">{{ waiting ? 'Working ...' : 'add comment' }}</button>
+          <fieldset ng-disabled="tempCom.id && waiting">
+            <textarea class="comment-form__text" placeholder='What do you think about this movie?*' ng-model="myReview"></textarea>
+            <label class="comment-form__info">* At least 10 characters</label>
+            <button ng-click="addComment()" class="btn btn-md btn--danger comment-form__btn">add comment</button>
+          </fieldset>
         </form>
         <div class="comment-sets">
           <div class="comment" ng-repeat="review in movieDetail.reviews | limitTo:limitNum">

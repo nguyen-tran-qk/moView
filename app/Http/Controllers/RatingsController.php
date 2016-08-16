@@ -25,7 +25,7 @@ class RatingsController extends Controller
     	$rating->points = $points;
         $rating->timestamps = false;
     	$rating->save();
-        return self::makeResponse(array('id' => $rating->id), 200, 'New rating added', '');
+        return array('id' => $rating->id);
     }
 
     public function getRatingByUser($user_id) {
