@@ -10,6 +10,23 @@
       $scope.limitNum = 10;
       $scope.allChallengesLoaded = false;
 
+      $scope.refreshMovie = function() {
+        MovieService.getMovieInfo(parseInt($stateParams.id), function(res) {
+          if (res && res.meta.code <= 200) {
+            $scope.movieDetail = res.body;
+            $scope.movieDetail.points = ($scope.movieDetail.rating * 50) / 100;
+            if ($scope.movieDetail.trailer && $scope.movieDetail.trailer.indexOf('watch?v=') !== -1) {
+              $scope.movieDetail.trailer = $scope.movieDetail.trailer.replace('watch?v=', 'embed/');
+              $scope.movieDetail.trailer = $scope.movieDetail.trailer.replace('https:', '');
+            }
+            $timeout(function() {
+              $rootScope.$pageFinishedLoading = true;
+            }, 1000);
+          }
+        });
+      };
+      $scope.refreshMovie();
+      
       $scope.loadMore = function() {
         if ($scope.limitNum < $scope.movieDetail.reviews.length) {
           $scope.limitNum += 10;
@@ -48,30 +65,18 @@
       $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src);
       };
-      MovieService.getMovieInfo(parseInt($stateParams.id), function(res) {
-        if (res && res.meta.code <= 200) {
-          $scope.movieDetail = res.body;
-          $scope.movieDetail.points = ($scope.movieDetail.rating * 50) / 100;
-          if ($scope.movieDetail.trailer && $scope.movieDetail.trailer.indexOf('watch?v=') !== -1) {
-            $scope.movieDetail.trailer = $scope.movieDetail.trailer.replace('watch?v=', 'embed/');
-            $scope.movieDetail.trailer = $scope.movieDetail.trailer.replace('https:', '');
-          }
-          $timeout(function() {
-            $rootScope.$pageFinishedLoading = true;
-          }, 1000);
-        }
-      });
+
       $scope.editComment = function(reviewId, content) {
         if ($scope.user && $scope.user.role === 1) {
           $scope.waiting = true;
           $scope.tempCom = { id: reviewId };
-          $scope.myReview = content;
-          MovieService.updateReview(reviewId, $scope.movieDetail.id, $scope.myReview, true, function(res) {
+          // $scope.myReview = content;
+          MovieService.updateReview(reviewId, $scope.movieDetail.id, content, true, function(res) {
             if (res && res.length) {
               $scope.edit = {};
               $scope.movieDetail.reviews = res;
               $scope.myReview = '';
-              $scope.waiting = true;
+              $scope.waiting = false;
               $scope.tempCom = {};
             }
           });
@@ -116,7 +121,7 @@
             if (res) {
               if (res.length) {
                 $scope.movieDetail.reviews = res;
-                $scope.waiting = true;
+                $scope.waiting = false;
                 $scope.tempCom = {};
               } else {
                 $scope.movieDetail.reviews = [];
