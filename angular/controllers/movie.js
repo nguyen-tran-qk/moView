@@ -19,6 +19,7 @@
           templateUrl: 'views/movie-popup.html',
           controller: 'PopupController',
           size: 'lg',
+          backdrop: 'static',
           resolve: {
             movie: movie,
             user: $scope.user

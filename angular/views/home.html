@@ -4,7 +4,7 @@
   <div style="height:50%">
     <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
       <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-        <img ng-src="{{slide.image}}" style="margin:auto; height:auto; min-width:100%;">
+        <img ng-src="{{slide.image}}" ng-click="viewMovieDetail(slide.movie_id)" style="margin:auto; height:auto; min-width:100%;">
         <!-- <div class="carousel-caption">
           <h4>Slide {{slide.id}}</h4>
           <p>{{slide.text}}</p>
@@ -23,11 +23,11 @@
         <div ng-style="{'background': 'url(' + movie.poster +') no-repeat center center', 'background-size': 'cover', 'height': '247px'}"></div>
         <span class="best-rate">{{movie.rating}}</span>
         <ul class="movie-beta__info">
-          <li><span class="best-voted">{{movie.name}}</span></li>
+          <li><span class="best-voted">{{movie.name | limitTo: 20}} {{ movie.name.length > 20 ? '&hellip;' : '' }}</span></li>
           <li>
             <p class="movie__time">{{movie.duration}}</p>
-            <p>{{movie.genre}}</p>
-            <p>{{movie.cast}}</p>
+            <p>{{movie.genre | limitTo: 20}} {{ movie.genre.length > 20 ? '&hellip;' : '' }}</p>
+            <p>{{movie.cast | limitTo: 40}} {{ movie.cast.length > 40 ? '&hellip;' : '' }}</p>
           </li>
           <li class="last-block">
             <a href ng-click="viewMovieDetail(movie.id)" class="slide__link">more</a>
@@ -35,7 +35,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-sm-10 col-sm-offset-1 movie-best__check">check all movies now playing</div>
+    <div class="col-sm-10 col-sm-offset-1 movie-best__check" ng-click="scrollToSection('#target')">check all movies now playing</div>
   </div>
   <div class="col-sm-12">
     <div class="mega-select-present mega-select-top mega-select--full">

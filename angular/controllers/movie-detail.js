@@ -130,10 +130,6 @@
           });
         }
       };
-      $scope.srollToCmtSection = function() {
-        $('html,body').animate({
-          scrollTop: $("#comment-section").offset().top
-        }, 'slow');
-      };
+      
     }])
 }());

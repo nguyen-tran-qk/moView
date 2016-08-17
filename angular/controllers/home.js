@@ -20,7 +20,8 @@
             angular.forEach($scope.movies, function(movie) {
               $scope.slides.push({
                 image: movie.banner,
-                id: currIndex++
+                id: currIndex++,
+                movie_id: movie.id
               });
             })
             $scope.chunkedMovies = chunk($scope.movies, 2);

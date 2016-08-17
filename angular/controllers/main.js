@@ -31,6 +31,11 @@
         });
         $scope.user = UserService.isLoggedIn();
       };
+      $scope.scrollToSection = function(section) {
+        $('html,body').animate({
+          scrollTop: $(section).offset().top
+        }, 'slow');
+      };
     }])
     .controller('LoginController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'UserService', 'signUp', function($scope, $http, $uibModal, $uibModalInstance, UserService, signUp) {
       if (signUp) {
