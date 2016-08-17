@@ -14,7 +14,7 @@
               <colgroup class="col-width">
                 <colgroup class="col-width-sm">
                   <colgroup class="col-width">
-                    <tr ng-repeat="movie in movies |orderBy: date_released | filter:query" class="rates rates--top">
+                    <tr ng-repeat="movie in movies |orderBy: 'date_released' | filter:query" class="rates rates--top">
                       <td class="rates__obj"><a href ng-click="viewMovieDetail(movie.id)" class="rates__obj-name">{{$index +1}}. {{movie.name}} </a></td>
                       <!-- <td class="rates__vote">233 546 votes</td> -->
                       <td class="rates__result">{{movie.rating}}</td>
