@@ -113,7 +113,7 @@ class MoviesController extends Controller
                 // insert rating to rating table
                 $result = (new RatingsController)->addRating($movie->id, $user->id, $points);
                 if ($result['id']) {
-                    $movie->rating = $this->getRating($movie->id);
+                    $movie->rating = number_format($this->getRating($movie->id), 1);
                 } else {
                     return self::makeResponse([], 500, 'Internal Server Error', '');
                 }

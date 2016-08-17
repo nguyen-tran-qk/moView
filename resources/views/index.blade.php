@@ -1,9 +1,6 @@
 <!doctype html>
 <html ng-app="MoviewApp">
 <head>
-    <!-- google client ID -->
-    <meta name="google-signin-client_id" content="16234131622-pmjdusc75n1s8b885banj766qarbu4v4.apps.googleusercontent.com">
-    <!--  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- <link href="/images/favicon.png" rel="shortcut icon"> -->
     <link rel="stylesheet" href="{!! asset('styles/vendor.css') !!}">
@@ -17,9 +14,6 @@
     <![endif]-->
 </head>
 <body>
-<!-- will delete this -->
-  <div id="fb-root"></div> 
-  <!--  -->
   <div class="wrapper" ui-view="main" ng-show="$pageFinishedLoading">
       <!-- <div class="loading"></div> -->
   </div>
@@ -29,10 +23,6 @@
 <script src="{!! asset('scripts/vendor.js') !!}"></script>
 <script src="{!! asset('scripts/app.js') !!}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-<!-- google api -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="https://apis.google.com/js/plus.js?onload=init"></script>
 
 {{--livereload--}}
 @if ( Config::get('app.debug') )

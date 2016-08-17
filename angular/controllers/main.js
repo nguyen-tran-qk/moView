@@ -3,14 +3,7 @@
   angular.module('MoviewControllers')
     .controller('MainController', ['$scope', '$rootScope', '$state', '$http', '$timeout', '$uibModal', '$anchorScroll', '$location', 'UserService', 'MovieService', 'login', function($scope, $rootScope, $state, $http, $timeout, $uibModal, $anchorScroll, $location, UserService, MovieService, login) {
       $rootScope.$pageFinishedLoading = false;
-      gapi.load('auth2', function() { //load in the auth2 api's, without it gapi.auth2 will be undefined
-        gapi.auth2.init({
-          client_id: '16234131622-pmjdusc75n1s8b885banj766qarbu4v4.apps.googleusercontent.com'
-        });
-      });
-
       $scope.user = login;
-
       $scope.$state = $state;
 
       $scope.activeButton = function() {

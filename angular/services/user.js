@@ -26,17 +26,6 @@
               }
             });
         },
-        getFacebookInfo: function(token) {
-          var deferred = $q.defer();
-          FB.api('/me', { fields: 'id, name, last_name, email', access_token: token }, function(res) {
-            if (!res || res.error) {
-              deferred.reject('Error occured');
-            } else {
-              deferred.resolve(res);
-            }
-          });
-          return deferred.promise;
-        },
         login: function(user, callback, errorCallback) {
           $http.post('/login', { username: user.username, password: user.password })
             .success(function(res) {
